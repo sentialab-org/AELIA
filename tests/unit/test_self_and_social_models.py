@@ -2,15 +2,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.cognition.social import SocialPolicy
-from polyverse.models.self_model import SelfModelBuilder
-from polyverse.models.social import SocialState
-from polyverse.persona.loader import PersonaSourceLoader
-from polyverse.persona.models import RelationshipTier
+from aelia.cognition.social import SocialPolicy
+from aelia.models.self_model import SelfModelBuilder
+from aelia.models.social import SocialState
+from aelia.persona.loader import PersonaSourceLoader
+from aelia.persona.models import RelationshipTier
 from tests.helpers import make_event
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = PROJECT_ROOT / "src/polyverse/persona/source/manifest.json"
+MANIFEST_PATH = PROJECT_ROOT / "src/aelia/persona/source/manifest.json"
 
 
 def test_self_model_is_stable_and_traceable_to_persona_rules() -> None:

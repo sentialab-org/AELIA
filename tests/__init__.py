@@ -1,1 +1,1 @@
-"""Polyverse Agent V2 tests."""
+"""AELIA tests."""

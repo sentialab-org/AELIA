@@ -3,13 +3,13 @@ from __future__ import annotations
 import json
 import logging
 
-from polyverse.app.logging import JsonLogFormatter, configure_json_logging
+from aelia.app.logging import JsonLogFormatter, configure_json_logging
 
 
 def test_json_log_formatter_emits_only_bounded_structured_fields() -> None:
     record = logging.makeLogRecord(
         {
-            "name": "polyverse.test",
+            "name": "aelia.test",
             "levelno": logging.INFO,
             "levelname": "INFO",
             "msg": "cycle_processed",
@@ -29,20 +29,20 @@ def test_json_log_formatter_emits_only_bounded_structured_fields() -> None:
 
 
 def test_logging_configuration_is_idempotent_and_honors_level() -> None:
-    polyverse_logger = logging.getLogger("polyverse")
-    existing_handlers = tuple(polyverse_logger.handlers)
+    aelia_logger = logging.getLogger("aelia")
+    existing_handlers = tuple(aelia_logger.handlers)
     try:
         configure_json_logging("WARNING")
         configure_json_logging("DEBUG")
         json_handlers = [
             handler
-            for handler in polyverse_logger.handlers
+            for handler in aelia_logger.handlers
             if isinstance(handler.formatter, JsonLogFormatter)
         ]
 
-        assert polyverse_logger.level == logging.DEBUG
+        assert aelia_logger.level == logging.DEBUG
         assert len(json_handlers) == 1
         assert json_handlers[0].level == logging.DEBUG
-        assert polyverse_logger.propagate is False
+        assert aelia_logger.propagate is False
     finally:
-        polyverse_logger.handlers = list(existing_handlers)
+        aelia_logger.handlers = list(existing_handlers)

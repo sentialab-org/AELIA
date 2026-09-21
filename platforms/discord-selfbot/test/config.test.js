@@ -7,7 +7,7 @@ const { loadConfig, redactedConfigStatus } = require("../src/config");
 test("configuration is dry-run by default and requires a channel allowlist", () => {
   const config = loadConfig({
     DISCORD_SELFBOT_TOKEN: "test-token",
-    POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1, channel-2",
+    AELIA_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1, channel-2",
   });
 
   assert.equal(config.sendEnabled, false);
@@ -22,7 +22,7 @@ test("configuration is dry-run by default and requires a channel allowlist", () 
 test("channel allowlist accepts -1 as an exclusive all-channel wildcard", () => {
   const config = loadConfig({
     DISCORD_SELFBOT_TOKEN: "test-token",
-    POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS: "-1",
+    AELIA_DISCORD_ALLOWED_CHANNEL_IDS: "-1",
   });
 
   assert.equal(config.allowAllChannels, true);
@@ -31,7 +31,7 @@ test("channel allowlist accepts -1 as an exclusive all-channel wildcard", () => 
     () =>
       loadConfig({
         DISCORD_SELFBOT_TOKEN: "test-token",
-        POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS: "-1,channel-1",
+        AELIA_DISCORD_ALLOWED_CHANNEL_IDS: "-1,channel-1",
       }),
     /wildcard -1 must be used alone/,
   );
@@ -42,8 +42,8 @@ test("send kill switch accepts only explicit booleans", () => {
     () =>
       loadConfig({
         DISCORD_SELFBOT_TOKEN: "test-token",
-        POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1",
-        POLYVERSE_DISCORD_SEND_ENABLED: "yes",
+        AELIA_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1",
+        AELIA_DISCORD_SEND_ENABLED: "yes",
       }),
     /Expected true or false/,
   );
@@ -54,10 +54,10 @@ test("redacted configuration status reports operational settings without secrets
   const runtimeToken = "test-runtime-token";
   const config = loadConfig({
     DISCORD_SELFBOT_TOKEN: token,
-    POLYVERSE_RUNTIME_GATE_TOKEN: runtimeToken,
-    POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1",
-    POLYVERSE_DISCORD_SEND_ENABLED: "true",
-    POLYVERSE_DISCORD_ADAPTER_MODE: "external_canary",
+    AELIA_RUNTIME_GATE_TOKEN: runtimeToken,
+    AELIA_DISCORD_ALLOWED_CHANNEL_IDS: "channel-1",
+    AELIA_DISCORD_SEND_ENABLED: "true",
+    AELIA_DISCORD_ADAPTER_MODE: "external_canary",
   });
 
   const status = redactedConfigStatus(config);

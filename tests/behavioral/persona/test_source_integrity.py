@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.persona.loader import PersonaSourceLoader
+from aelia.persona.loader import PersonaSourceLoader
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-MANIFEST_PATH = PROJECT_ROOT / "src/polyverse/persona/source/manifest.json"
+MANIFEST_PATH = PROJECT_ROOT / "src/aelia/persona/source/manifest.json"
 
 
 def test_all_persona_sources_match_recorded_hashes() -> None:
@@ -22,19 +22,19 @@ def test_v2_archive_is_byte_for_byte_equal_to_v1_sources() -> None:
     source_pairs = (
         (
             "legacy/v1-rust/prompts/persona/base.txt",
-            "src/polyverse/persona/source/archive/base.v1.txt",
+            "src/aelia/persona/source/archive/base.v1.txt",
         ),
         (
             "legacy/v1-rust/prompts/persona/base.v2.txt",
-            "src/polyverse/persona/source/archive/base.v2.txt",
+            "src/aelia/persona/source/archive/base.v2.txt",
         ),
         (
             "legacy/v1-rust/prompts/persona/base.v3.txt",
-            "src/polyverse/persona/source/archive/base.v3.txt",
+            "src/aelia/persona/source/archive/base.v3.txt",
         ),
         (
             "legacy/v1-rust/prompts/persona/fallback_short.txt",
-            "src/polyverse/persona/source/archive/fallback.short.txt",
+            "src/aelia/persona/source/archive/fallback.short.txt",
         ),
     )
 

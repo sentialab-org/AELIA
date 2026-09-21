@@ -7,7 +7,7 @@ const { loadConfig, validateApiBase } = require("../src/config");
 test("Telegram bot config defaults to dry-run and HTTPS Bot API", () => {
   const config = loadConfig({
     TELEGRAM_BOT_TOKEN: "test-token",
-    POLYVERSE_TELEGRAM_ALLOWED_CHAT_IDS: "-1001,42",
+    AELIA_TELEGRAM_ALLOWED_CHAT_IDS: "-1001,42",
   });
 
   assert.equal(config.sendEnabled, false);

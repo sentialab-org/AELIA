@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
-from polyverse.contracts.adapter import (
+from aelia.contracts.adapter import (
     AdapterDeliveryReceipt,
     AdapterInboundEnvelope,
     AdapterMode,
@@ -75,7 +75,7 @@ def test_test_canary_requires_a_unique_explicit_allowlist() -> None:
 def test_core_kernel_does_not_import_adapter_implementation() -> None:
     from pathlib import Path
 
-    root = Path(__file__).resolve().parents[2] / "src/polyverse"
+    root = Path(__file__).resolve().parents[2] / "src/aelia"
     core_directories = (
         root / "cognition",
         root / "models",
@@ -88,7 +88,7 @@ def test_core_kernel_does_not_import_adapter_implementation() -> None:
         for path in directory.rglob("*.py")
     ]
 
-    assert all("polyverse.adapters" not in source for source in core_sources)
+    assert all("aelia.adapters" not in source for source in core_sources)
     assert set(AdapterMode) == {
         AdapterMode.SHADOW,
         AdapterMode.TEST_CANARY,

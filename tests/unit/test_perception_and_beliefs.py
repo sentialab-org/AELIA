@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from polyverse.cognition.attention import AttentionPolicy
-from polyverse.cognition.beliefs import BeliefPolicy
-from polyverse.cognition.perception import PerceptionPolicy
-from polyverse.contracts.events import ChannelType
-from polyverse.contracts.observation import ObservationSnapshot
-from polyverse.models.belief import BeliefSnapshot, BeliefStatus
-from polyverse.models.perception import EpistemicKind, PerceptionDepth
+from aelia.cognition.attention import AttentionPolicy
+from aelia.cognition.beliefs import BeliefPolicy
+from aelia.cognition.perception import PerceptionPolicy
+from aelia.contracts.events import ChannelType
+from aelia.contracts.observation import ObservationSnapshot
+from aelia.models.belief import BeliefSnapshot, BeliefStatus
+from aelia.models.perception import EpistemicKind, PerceptionDepth
 from tests.helpers import make_event
 
 

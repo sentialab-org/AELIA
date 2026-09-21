@@ -12,7 +12,7 @@ const { TelegramPollingRunner } = require("./polling");
 const projectRoot = path.resolve(__dirname, "../../..");
 dotenv.config({
   path:
-    process.env.POLYVERSE_TELEGRAM_ENV_FILE ||
+    process.env.AELIA_TELEGRAM_ENV_FILE ||
     path.join(projectRoot, "platforms/telegram-officialbot/.env"),
   quiet: true,
 });

@@ -21,7 +21,7 @@ send_enabled = true
 npm --prefix platforms/telegram-officialbot ci
 npm --prefix platforms/telegram-officialbot run check
 npm --prefix platforms/telegram-officialbot test
-uv run polyverse adapter connector-preflight \
+uv run aelia adapter connector-preflight \
   platforms/telegram-officialbot/capabilities.json
 make backend
 make telegram-officialbot-run

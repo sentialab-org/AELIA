@@ -1,0 +1,86 @@
+name: AELIA quality
+
+on:
+  push:
+    paths:
+      - ".github/workflows/quality.yml"
+      - ".env.example"
+      - "Makefile"
+      - "README.md"
+      - "docs/**"
+      - "legacy/v1-rust/**"
+      - "platforms/**"
+      - "pyproject.toml"
+      - "src/**"
+      - "tests/**"
+      - "uv.lock"
+  pull_request:
+    paths:
+      - ".github/workflows/quality.yml"
+      - ".env.example"
+      - "Makefile"
+      - "README.md"
+      - "docs/**"
+      - "legacy/v1-rust/**"
+      - "platforms/**"
+      - "pyproject.toml"
+      - "src/**"
+      - "tests/**"
+      - "uv.lock"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Python 3.12 quality gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install Python
+        run: uv python install 3.12
+
+      - name: Sync locked dependencies
+        run: uv sync --frozen --all-groups
+
+      - name: Check formatting
+        run: uv run --frozen ruff format --check .
+
+      - name: Lint
+        run: uv run --frozen ruff check .
+
+      - name: Type-check
+        run: uv run --frozen mypy src tests
+
+      - name: Test
+        run: uv run --frozen pytest -q
+
+      - name: Test isolated Node connectors
+        run: |
+          node --check platforms/node-common/config.js
+          node --check platforms/node-common/journal.js
+          node --check platforms/node-common/kernel-client.js
+          node --check platforms/node-common/receipts.js
+          npm --prefix platforms/discord-selfbot run check
+          npm --prefix platforms/discord-selfbot test
+          npm --prefix platforms/discord-officialbot run check
+          npm --prefix platforms/discord-officialbot test
+          npm --prefix platforms/telegram-officialbot run check
+          npm --prefix platforms/telegram-officialbot test

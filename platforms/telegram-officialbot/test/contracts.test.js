@@ -17,13 +17,13 @@ test("Telegram update maps to a versioned V2 envelope", () => {
         date: 1785369600,
         chat: { id: -1001, type: "supergroup" },
         from: { id: 30, is_bot: false },
-        text: "hello @PolyverseBot",
-        entities: [{ type: "mention", offset: 6, length: 13 }],
+        text: "hello @AeliaBot",
+        entities: [{ type: "mention", offset: 6, length: 9 }],
       },
     },
     {
       adapterId: "telegram-officialbot-v2",
-      bot: { id: 99, username: "PolyverseBot" },
+      bot: { id: 99, username: "AeliaBot" },
       receivedAt: "2026-07-30T00:00:01Z",
     },
   );

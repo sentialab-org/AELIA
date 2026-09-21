@@ -4,45 +4,45 @@ import ast
 from pathlib import Path
 
 SOURCE_ROOT = Path(__file__).resolve().parents[2] / "src"
-PACKAGE_ROOT = SOURCE_ROOT / "polyverse"
+PACKAGE_ROOT = SOURCE_ROOT / "aelia"
 
 FORBIDDEN_PREFIXES = {
     "contracts": (
-        "polyverse.adapters",
-        "polyverse.cognition",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.cognition",
+        "aelia.runtime",
+        "aelia.storage",
     ),
     "models": (
-        "polyverse.adapters",
-        "polyverse.autonomy",
-        "polyverse.cognition",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.autonomy",
+        "aelia.cognition",
+        "aelia.runtime",
+        "aelia.storage",
     ),
     "persona": (
-        "polyverse.adapters",
-        "polyverse.cognition",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.cognition",
+        "aelia.runtime",
+        "aelia.storage",
     ),
     "cognition": (
-        "polyverse.adapters",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.runtime",
+        "aelia.storage",
     ),
     "autonomy": (
-        "polyverse.adapters",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.runtime",
+        "aelia.storage",
     ),
     "llm": (
-        "polyverse.adapters",
-        "polyverse.cognition",
-        "polyverse.runtime",
-        "polyverse.storage",
+        "aelia.adapters",
+        "aelia.cognition",
+        "aelia.runtime",
+        "aelia.storage",
     ),
-    "runtime": ("polyverse.adapters",),
+    "runtime": ("aelia.adapters",),
 }
 
 PLATFORM_SDK_PREFIXES = (

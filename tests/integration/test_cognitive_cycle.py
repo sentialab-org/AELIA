@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.contracts.events import ChannelType
-from polyverse.models.belief import BeliefStatus
-from polyverse.models.perception import EpistemicKind, PerceptionDepth
-from polyverse.models.world import WorldStatementKind
-from polyverse.runtime.replay import ReplayService
+from aelia.contracts.events import ChannelType
+from aelia.models.belief import BeliefStatus
+from aelia.models.perception import EpistemicKind, PerceptionDepth
+from aelia.models.world import WorldStatementKind
+from aelia.runtime.replay import ReplayService
 from tests.helpers import make_cognitive, make_event
 
 

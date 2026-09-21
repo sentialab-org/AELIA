@@ -4,7 +4,7 @@ import ast
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PYTHON_ROOT = PROJECT_ROOT / "src" / "polyverse"
+PYTHON_ROOT = PROJECT_ROOT / "src" / "aelia"
 PLATFORM_ROOT = PROJECT_ROOT / "platforms"
 
 
@@ -30,7 +30,7 @@ def test_backend_does_not_import_platform_packages_or_sdks() -> None:
 
 
 def test_node_gate_production_code_has_no_runtime_process_launcher() -> None:
-    forbidden = ("child_process", "spawn(", "exec(", "uv run", "polyverse adapter")
+    forbidden = ("child_process", "spawn(", "exec(", "uv run", "aelia adapter")
     violations = []
     for path in PLATFORM_ROOT.rglob("*.js"):
         if (

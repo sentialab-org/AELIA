@@ -15,7 +15,7 @@ const ALLOW_ALL_CHANNELS = "-1";
 
 function loadConfig(env = process.env) {
   const projectRoot = path.resolve(__dirname, "../../..");
-  const useToml = env === process.env || env.POLYVERSE_CONFIG_FILE;
+  const useToml = env === process.env || env.AELIA_CONFIG_FILE;
   const projectConfig = useToml ? loadTomlConfig(projectRoot, env) : {};
   const gate = tomlGate(projectConfig, "discord_officialbot");
   const runtime = tomlRuntime(projectConfig);
@@ -25,17 +25,17 @@ function loadConfig(env = process.env) {
   const allowedChannelIds = parseIds(
     valueOr(
       env,
-      "POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS",
+      "AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS",
       gate.allowed_conversation_ids,
     ),
   );
   if (allowedChannelIds.size === 0) {
-    throw new Error("POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS must not be empty");
+    throw new Error("AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS must not be empty");
   }
   const allowAllChannels = allowedChannelIds.has(ALLOW_ALL_CHANNELS);
   if (allowAllChannels && allowedChannelIds.size !== 1) {
     throw new Error(
-      "POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS wildcard -1 must be used alone",
+      "AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS wildcard -1 must be used alone",
     );
   }
   if (!env.DISCORD_BOT_TOKEN?.trim()) {
@@ -51,72 +51,72 @@ function loadConfig(env = process.env) {
       projectRoot,
       valueOr(
         env,
-        "POLYVERSE_DISCORD_OFFICIAL_STATE_PATH",
+        "AELIA_DISCORD_OFFICIAL_STATE_PATH",
         gate.state_path,
-        "data/v2/discord-officialbot-journal.jsonl",
+        "data/discord-officialbot-journal.jsonl",
       ),
     ),
     allowedChannelIds,
     allowedConversationIds: allowedChannelIds,
     allowAllChannels,
     allowedUserIds: parseIds(
-      valueOr(env, "POLYVERSE_DISCORD_OFFICIAL_ALLOWED_USER_IDS", gate.allowed_actor_ids),
+      valueOr(env, "AELIA_DISCORD_OFFICIAL_ALLOWED_USER_IDS", gate.allowed_actor_ids),
     ),
     sendEnabled: parseBoolean(
-      valueOr(env, "POLYVERSE_DISCORD_OFFICIAL_SEND_ENABLED", gate.send_enabled),
+      valueOr(env, "AELIA_DISCORD_OFFICIAL_SEND_ENABLED", gate.send_enabled),
       false,
     ),
     adapterMode: valueOr(
       env,
-      "POLYVERSE_DISCORD_OFFICIAL_ADAPTER_MODE",
+      "AELIA_DISCORD_OFFICIAL_ADAPTER_MODE",
       gate.mode,
       "shadow",
     ),
     runtimeUrl: valueOr(
       env,
-      "POLYVERSE_RUNTIME_URL",
+      "AELIA_RUNTIME_URL",
       runtime.public_url,
       `http://${runtime.host || "127.0.0.1"}:${runtime.port || 8787}`,
     ),
-    runtimeGateToken: env.POLYVERSE_RUNTIME_GATE_TOKEN?.trim() || null,
+    runtimeGateToken: env.AELIA_RUNTIME_GATE_TOKEN?.trim() || null,
     maxSendsPerHour: parseInteger(
       valueOr(
         env,
-        "POLYVERSE_DISCORD_OFFICIAL_MAX_SENDS_PER_HOUR",
+        "AELIA_DISCORD_OFFICIAL_MAX_SENDS_PER_HOUR",
         gate.max_sends_per_hour,
         5,
       ),
       5,
       1,
       1000,
-      "POLYVERSE_DISCORD_OFFICIAL_MAX_SENDS_PER_HOUR",
+      "AELIA_DISCORD_OFFICIAL_MAX_SENDS_PER_HOUR",
     ),
     kernelTimeoutMs: parseInteger(
       valueOr(
         env,
-        "POLYVERSE_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
+        "AELIA_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
         gate.request_timeout_ms,
         180000,
       ),
       180000,
       1000,
       600000,
-      "POLYVERSE_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
+      "AELIA_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
     ),
     secretEnvKeys: ["DISCORD_BOT_TOKEN"],
     requestTimeoutMs: parseInteger(
       valueOr(
         env,
-        "POLYVERSE_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
+        "AELIA_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
         gate.request_timeout_ms,
         180000,
       ),
       180000,
       1000,
       600000,
-      "POLYVERSE_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
+      "AELIA_DISCORD_OFFICIAL_KERNEL_TIMEOUT_MS",
     ),
-    connectorEnvPrefixes: ["POLYVERSE_DISCORD_OFFICIAL_"],
+    connectorEnvPrefixes: ["AELIA_DISCORD_OFFICIAL_"],
   });
 }
 

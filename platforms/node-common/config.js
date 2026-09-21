@@ -95,7 +95,7 @@ function parseToml(text) {
 }
 
 function loadTomlConfig(projectRoot, env = process.env) {
-  const configuredPath = env.POLYVERSE_CONFIG_FILE || path.join(projectRoot, "config.toml");
+  const configuredPath = env.AELIA_CONFIG_FILE || path.join(projectRoot, "config.toml");
   const configPath = path.resolve(projectRoot, configuredPath);
   if (!fs.existsSync(configPath)) return {};
   return parseToml(fs.readFileSync(configPath, "utf8"));

@@ -5,12 +5,12 @@ from datetime import UTC, datetime
 import pytest
 from pydantic import ValidationError
 
-from polyverse.contracts.connector import (
+from aelia.contracts.connector import (
     CURRENT_EXTERNAL_RECEIPT_SCHEMA_VERSION,
     ExternalDeliveryReceipt,
     ExternalReceiptStatus,
 )
-from polyverse.contracts.events import Platform
+from aelia.contracts.events import Platform
 
 
 def _receipt(**updates: object) -> ExternalDeliveryReceipt:

@@ -4,21 +4,21 @@ from datetime import UTC, datetime
 
 import pytest
 
-from polyverse.cognition.action_policy import ActionPolicy, TurnTakingPolicy
-from polyverse.cognition.conversation import ConversationPolicy
-from polyverse.cognition.goals import GoalManager
-from polyverse.contracts.actions import (
+from aelia.cognition.action_policy import ActionPolicy, TurnTakingPolicy
+from aelia.cognition.conversation import ConversationPolicy
+from aelia.cognition.goals import GoalManager
+from aelia.contracts.actions import (
     ActionCandidate,
     ActionTarget,
     CandidateActionType,
     DeliberationResult,
     TurnTakingOutcome,
 )
-from polyverse.contracts.events import ChannelType
-from polyverse.contracts.observation import ObservationSnapshot, RecentParticipation
-from polyverse.contracts.participation import ParticipationOutcome
-from polyverse.models.cognition import InternalState
-from polyverse.models.goals import GoalStatus
+from aelia.contracts.events import ChannelType
+from aelia.contracts.observation import ObservationSnapshot, RecentParticipation
+from aelia.contracts.participation import ParticipationOutcome
+from aelia.models.cognition import InternalState
+from aelia.models.goals import GoalStatus
 from tests.helpers import make_event
 
 

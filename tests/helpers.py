@@ -3,20 +3,20 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from pathlib import Path
 
-from polyverse.adapters.repository import SqliteAdapterRepository
-from polyverse.adapters.runtime import CliKernelAdapter, MockAdapterTransport
-from polyverse.contracts.actions import (
+from aelia.adapters.repository import SqliteAdapterRepository
+from aelia.adapters.runtime import CliKernelAdapter, MockAdapterTransport
+from aelia.contracts.actions import (
     LanguageGenerationResult,
     LanguageGenerationStatus,
     OutboundAction,
 )
-from polyverse.contracts.adapter import (
+from aelia.contracts.adapter import (
     CURRENT_ADAPTER_INBOUND_SCHEMA_VERSION,
     AdapterInboundEnvelope,
     AdapterMode,
     AdapterPolicyConfig,
 )
-from polyverse.contracts.events import (
+from aelia.contracts.events import (
     ChannelType,
     EventType,
     InboundEvent,
@@ -25,13 +25,13 @@ from polyverse.contracts.events import (
     ReplyReference,
     SourceReference,
 )
-from polyverse.models.autonomy import (
+from aelia.models.autonomy import (
     AutonomyMode,
     AutonomyPolicyConfig,
 )
-from polyverse.persona.loader import PersonaSourceLoader
-from polyverse.persona.models import PersonaView
-from polyverse.runtime.orchestrator import (
+from aelia.persona.loader import PersonaSourceLoader
+from aelia.persona.models import PersonaView
+from aelia.runtime.orchestrator import (
     ActionOrchestrator,
     AutonomyOrchestrator,
     CognitiveOrchestrator,
@@ -40,9 +40,9 @@ from polyverse.runtime.orchestrator import (
     ObservationOrchestrator,
     PersonaOrchestrator,
 )
-from polyverse.runtime.ports import ExecutionPort, LanguageGeneratorPort
-from polyverse.storage.database import Database
-from polyverse.storage.repositories import SqliteKernelRepository
+from aelia.runtime.ports import ExecutionPort, LanguageGeneratorPort
+from aelia.storage.database import Database
+from aelia.storage.repositories import SqliteKernelRepository
 
 
 def make_event(
@@ -91,7 +91,7 @@ def make_event(
 async def make_foundation(
     temporary_directory: Path,
 ) -> tuple[SqliteKernelRepository, FoundationOrchestrator]:
-    database = Database(temporary_directory / "polyverse-test.db")
+    database = Database(temporary_directory / "aelia-test.db")
     repository = SqliteKernelRepository(database)
     orchestrator = FoundationOrchestrator(repository)
     await orchestrator.initialize()
@@ -105,7 +105,7 @@ async def make_observation(
     conversation_buffer_limit: int = 100,
     recent_participation_limit: int = 10,
 ) -> tuple[SqliteKernelRepository, ObservationOrchestrator]:
-    database = Database(temporary_directory / "polyverse-observation-test.db")
+    database = Database(temporary_directory / "aelia-observation-test.db")
     repository = SqliteKernelRepository(
         database,
         conversation_buffer_limit=conversation_buffer_limit,
@@ -124,11 +124,11 @@ async def make_persona(
     *,
     agent_actor_id: str = "agent-001",
 ) -> tuple[SqliteKernelRepository, PersonaOrchestrator]:
-    database = Database(temporary_directory / "polyverse-persona-test.db")
+    database = Database(temporary_directory / "aelia-persona-test.db")
     repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = PersonaOrchestrator(
@@ -145,11 +145,11 @@ async def make_cognitive(
     *,
     agent_actor_id: str = "agent-001",
 ) -> tuple[SqliteKernelRepository, CognitiveOrchestrator]:
-    database = Database(temporary_directory / "polyverse-cognitive-test.db")
+    database = Database(temporary_directory / "aelia-cognitive-test.db")
     repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = CognitiveOrchestrator(
@@ -168,11 +168,11 @@ async def make_action(
     execution_port: ExecutionPort | None = None,
     language_generator: LanguageGeneratorPort | None = None,
 ) -> tuple[SqliteKernelRepository, ActionOrchestrator]:
-    database = Database(temporary_directory / "polyverse-action-test.db")
+    database = Database(temporary_directory / "aelia-action-test.db")
     repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = ActionOrchestrator(
@@ -193,11 +193,11 @@ async def make_memory(
     execution_port: ExecutionPort | None = None,
     language_generator: LanguageGeneratorPort | None = None,
 ) -> tuple[SqliteKernelRepository, MemoryOrchestrator]:
-    database = Database(temporary_directory / "polyverse-memory-test.db")
+    database = Database(temporary_directory / "aelia-memory-test.db")
     repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = MemoryOrchestrator(
@@ -244,11 +244,11 @@ async def make_autonomy(
     execution_port: ExecutionPort | None = None,
     language_generator: LanguageGeneratorPort | None = None,
 ) -> tuple[SqliteKernelRepository, AutonomyOrchestrator]:
-    database = Database(temporary_directory / "polyverse-autonomy-test.db")
+    database = Database(temporary_directory / "aelia-autonomy-test.db")
     repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = AutonomyOrchestrator(
@@ -324,11 +324,11 @@ async def make_adapter(
     CliKernelAdapter,
     MockAdapterTransport,
 ]:
-    database = Database(temporary_directory / "polyverse-adapter-test.db")
+    database = Database(temporary_directory / "aelia-adapter-test.db")
     kernel_repository = SqliteKernelRepository(database)
     project_root = Path(__file__).resolve().parents[1]
     specification = PersonaSourceLoader(
-        project_root / "src/polyverse/persona/source/manifest.json",
+        project_root / "src/aelia/persona/source/manifest.json",
         repository_root=project_root,
     ).load_specification()
     orchestrator = AutonomyOrchestrator(

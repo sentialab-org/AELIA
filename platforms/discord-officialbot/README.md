@@ -22,7 +22,7 @@ send_enabled = true
 npm --prefix platforms/discord-officialbot ci
 npm --prefix platforms/discord-officialbot run check
 npm --prefix platforms/discord-officialbot test
-uv run polyverse adapter connector-preflight \
+uv run aelia adapter connector-preflight \
   platforms/discord-officialbot/capabilities.json
 make backend
 make discord-officialbot-run

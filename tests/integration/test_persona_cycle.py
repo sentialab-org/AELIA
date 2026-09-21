@@ -3,17 +3,17 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from pathlib import Path
 
-from polyverse.contracts.observation import ObservationSnapshot
-from polyverse.contracts.participation import ParticipationDecision, ParticipationOutcome
-from polyverse.models.social import SocialState
-from polyverse.persona.models import (
+from aelia.contracts.observation import ObservationSnapshot
+from aelia.contracts.participation import ParticipationDecision, ParticipationOutcome
+from aelia.models.social import SocialState
+from aelia.persona.models import (
     DisclosureClass,
     DisclosureGateDecision,
     RelationshipTier,
 )
-from polyverse.runtime.orchestrator import PersonaOrchestrator
-from polyverse.runtime.ports import MockExecutionPort, MockLanguagePort
-from polyverse.runtime.replay import ReplayService
+from aelia.runtime.orchestrator import PersonaOrchestrator
+from aelia.runtime.ports import MockExecutionPort, MockLanguagePort
+from aelia.runtime.replay import ReplayService
 from tests.helpers import make_event, make_persona
 
 

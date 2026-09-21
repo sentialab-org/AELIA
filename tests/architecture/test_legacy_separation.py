@@ -33,7 +33,7 @@ def test_v1_runtime_is_isolated_from_the_v2_root() -> None:
 
 def test_v2_python_source_has_no_legacy_runtime_dependency() -> None:
     violations = []
-    for source_path in (PROJECT_ROOT / "src/polyverse").rglob("*.py"):
+    for source_path in (PROJECT_ROOT / "src/aelia").rglob("*.py"):
         source = source_path.read_text(encoding="utf-8")
         if "legacy/v1-rust" in source or "legacy.v1_rust" in source:
             violations.append(str(source_path.relative_to(PROJECT_ROOT)))

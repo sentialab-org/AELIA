@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.runtime.observability import TraceObservabilityService
-from polyverse.runtime.replay import ReplayService
-from polyverse.storage.database import Database
-from polyverse.storage.repositories import SqliteKernelRepository
+from aelia.runtime.observability import TraceObservabilityService
+from aelia.runtime.replay import ReplayService
+from aelia.storage.database import Database
+from aelia.storage.repositories import SqliteKernelRepository
 from tests.helpers import make_event, make_foundation
 
 

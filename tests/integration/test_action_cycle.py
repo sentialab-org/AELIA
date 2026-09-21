@@ -4,20 +4,20 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.contracts.actions import (
+from aelia.contracts.actions import (
     ActionType,
     CandidateActionType,
     ExecutionStatus,
     OutboundAction,
     TurnTakingOutcome,
 )
-from polyverse.contracts.events import InboundEvent, ReplyReference
-from polyverse.contracts.participation import ParticipationDecision, ParticipationOutcome
-from polyverse.contracts.traces import CycleStatus, CycleTrace
-from polyverse.models.goals import GoalStatus
-from polyverse.runtime.ports import FailingExecutionPort
-from polyverse.runtime.replay import ReplayService
-from polyverse.storage.repositories import (
+from aelia.contracts.events import InboundEvent, ReplyReference
+from aelia.contracts.participation import ParticipationDecision, ParticipationOutcome
+from aelia.contracts.traces import CycleStatus, CycleTrace
+from aelia.models.goals import GoalStatus
+from aelia.runtime.ports import FailingExecutionPort
+from aelia.runtime.replay import ReplayService
+from aelia.storage.repositories import (
     ConcurrentStateError,
     FoundationIngestResult,
     canonical_json,
@@ -69,7 +69,7 @@ async def test_action_cycle_scores_selects_generates_executes_and_replays(
     assert result.trace.selected_action.schema_version == "2.2.0"
     assert result.trace.selected_action.idempotency_key == f"event:{event.event_id}:reply"
     assert result.trace.selected_action.content_plan.prompt is not None
-    assert result.trace.selected_action.content_plan.prompt.owner == "polyverse-language-boundary"
+    assert result.trace.selected_action.content_plan.prompt.owner == "aelia-language-boundary"
     assert result.trace.language_generation is not None
     assert result.trace.language_generation.changed_participation is False
     assert result.trace.execution_result is not None

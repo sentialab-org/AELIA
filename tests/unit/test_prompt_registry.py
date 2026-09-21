@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from polyverse.llm.prompts import (
+from aelia.llm.prompts import (
     LANGUAGE_REALIZATION_PROMPT,
     LANGUAGE_REALIZATION_PROMPT_ID,
     PromptRegistry,
@@ -21,10 +21,10 @@ def test_language_prompt_definition_has_a_stable_reviewable_snapshot() -> None:
     )
 
     assert LANGUAGE_REALIZATION_PROMPT.schema_version == "1.0.0"
-    assert LANGUAGE_REALIZATION_PROMPT.version == "1.1.0"
-    assert LANGUAGE_REALIZATION_PROMPT.owner == "polyverse-language-boundary"
+    assert LANGUAGE_REALIZATION_PROMPT.version == "1.2.0"
+    assert LANGUAGE_REALIZATION_PROMPT.owner == "aelia-language-boundary"
     assert hashlib.sha256(payload.encode("utf-8")).hexdigest() == (
-        "1d17e6b04cccf3cfd06a05c5e4da769359a33d9310c8dfa68a2efff6d8b6d87a"
+        "60efd1a088a98b184266ceeada8a53c2b6c25310934d0ec070ac42e33e8c6c68"
     )
 
 

@@ -5,8 +5,8 @@ UV ?= uv
 
 .DEFAULT_GOAL := backend
 
-.PHONY: help v2-sync v2-doctor v2-init v2-quality v2-adapter-schema \
-	v2-connector-preflight discord-selfbot-install discord-selfbot-test \
+.PHONY: help sync doctor init quality adapter-schema \
+	connector-preflight discord-selfbot-install discord-selfbot-test \
 	discord-selfbot-run discord-selfbot-start discord-officialbot-install \
 	discord-officialbot-test discord-officialbot-run discord-officialbot-start \
 	telegram-officialbot-install telegram-officialbot-test \
@@ -16,12 +16,12 @@ UV ?= uv
 help:
 	@echo "Targets:"
 	@echo "  make / make backend      Start only the independent runtime backend"
-	@echo "  make v2-sync            Install locked V2 dependencies"
-	@echo "  make v2-doctor          Validate V2 config and persona integrity"
-	@echo "  make v2-init            Initialize the V2 SQLite database"
-	@echo "  make v2-quality         Run the complete V2 quality gate"
-	@echo "  make v2-adapter-schema  Print active and future connector schemas"
-	@echo "  make v2-connector-preflight  Verify the example connector manifest"
+	@echo "  make sync            Install locked dependencies"
+	@echo "  make doctor          Validate config and persona integrity"
+	@echo "  make init            Initialize the SQLite database"
+	@echo "  make quality         Run the complete quality gate"
+	@echo "  make adapter-schema  Print active and future connector schemas"
+	@echo "  make connector-preflight  Verify the example connector manifest"
 	@echo "  make discord-selfbot-install  Install the isolated Node connector"
 	@echo "  make discord-selfbot-test     Test the isolated Node connector"
 	@echo "  make discord-selfbot-run      Start only the Discord selfbot gate"
@@ -39,19 +39,19 @@ help:
 	@echo ""
 	@echo "Frozen V1: cd legacy/v1-rust && make help"
 
-v2-sync:
+sync:
 	@$(UV) sync --frozen --all-groups
 
 backend:
-	$(UV) run --frozen polyverse-backend
+	$(UV) run --frozen aelia-backend
 
-v2-doctor:
-	@$(UV) run --frozen polyverse config doctor
+doctor:
+	@$(UV) run --frozen aelia config doctor
 
-v2-init:
-	@$(UV) run --frozen polyverse db init
+init:
+	@$(UV) run --frozen aelia db init
 
-v2-quality: v2-sync
+quality: sync
 	$(UV) run --frozen ruff format --check .
 	$(UV) run --frozen ruff check .
 	$(UV) run --frozen mypy src tests
@@ -68,11 +68,11 @@ v2-quality: v2-sync
 	npm --prefix platforms/telegram-officialbot run check
 	npm --prefix platforms/telegram-officialbot test
 
-v2-adapter-schema:
-	@$(UV) run --frozen polyverse adapter schema
+adapter-schema:
+	@$(UV) run --frozen aelia adapter schema
 
-v2-connector-preflight:
-	@$(UV) run --frozen polyverse adapter connector-preflight \
+connector-preflight:
+	@$(UV) run --frozen aelia adapter connector-preflight \
 		tests/fixtures/adapter/connector_capabilities.json
 
 discord-selfbot-install:
@@ -81,7 +81,7 @@ discord-selfbot-install:
 discord-selfbot-test:
 	npm --prefix platforms/discord-selfbot run check
 	npm --prefix platforms/discord-selfbot test
-	@$(UV) run --frozen polyverse adapter connector-preflight \
+	@$(UV) run --frozen aelia adapter connector-preflight \
 		platforms/discord-selfbot/capabilities.json
 
 discord-selfbot-run:
@@ -95,7 +95,7 @@ discord-officialbot-install:
 discord-officialbot-test:
 	npm --prefix platforms/discord-officialbot run check
 	npm --prefix platforms/discord-officialbot test
-	@$(UV) run --frozen polyverse adapter connector-preflight \
+	@$(UV) run --frozen aelia adapter connector-preflight \
 		platforms/discord-officialbot/capabilities.json
 
 discord-officialbot-run:
@@ -109,7 +109,7 @@ telegram-officialbot-install:
 telegram-officialbot-test:
 	npm --prefix platforms/telegram-officialbot run check
 	npm --prefix platforms/telegram-officialbot test
-	@$(UV) run --frozen polyverse adapter connector-preflight \
+	@$(UV) run --frozen aelia adapter connector-preflight \
 		platforms/telegram-officialbot/capabilities.json
 
 telegram-officialbot-run:

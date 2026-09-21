@@ -5,14 +5,14 @@ from datetime import UTC, datetime
 import pytest
 from pydantic import ValidationError
 
-from polyverse.contracts.actions import (
+from aelia.contracts.actions import (
     ActionTarget,
     ActionType,
     ContentPlan,
     OutboundAction,
     RiskClass,
 )
-from polyverse.contracts.participation import (
+from aelia.contracts.participation import (
     ParticipationDecision,
     ParticipationOutcome,
     ScoreBreakdown,

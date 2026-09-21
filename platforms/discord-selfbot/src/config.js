@@ -16,7 +16,7 @@ const ALLOW_ALL_CHANNELS = "-1";
 
 function loadConfig(env = process.env) {
   const projectRoot = path.resolve(__dirname, "../../..");
-  const useToml = env === process.env || env.POLYVERSE_CONFIG_FILE;
+  const useToml = env === process.env || env.AELIA_CONFIG_FILE;
   const projectConfig = useToml ? loadTomlConfig(projectRoot, env) : {};
   const gate = tomlGate(projectConfig, "discord_selfbot");
   const runtime = tomlRuntime(projectConfig);
@@ -24,20 +24,20 @@ function loadConfig(env = process.env) {
     throw new Error("Discord selfbot gate is disabled in config.toml");
   }
   const allowedChannelIds = parseIds(
-    valueOr(env, "POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS", gate.allowed_conversation_ids),
+    valueOr(env, "AELIA_DISCORD_ALLOWED_CHANNEL_IDS", gate.allowed_conversation_ids),
   );
   const allowAllChannels = allowedChannelIds.has(ALLOW_ALL_CHANNELS);
   const sendEnabled = parseBoolean(
-    valueOr(env, "POLYVERSE_DISCORD_SEND_ENABLED", gate.send_enabled),
+    valueOr(env, "AELIA_DISCORD_SEND_ENABLED", gate.send_enabled),
     false,
   );
 
   if (allowedChannelIds.size === 0) {
-    throw new Error("POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS must not be empty");
+    throw new Error("AELIA_DISCORD_ALLOWED_CHANNEL_IDS must not be empty");
   }
   if (allowAllChannels && allowedChannelIds.size !== 1) {
     throw new Error(
-      "POLYVERSE_DISCORD_ALLOWED_CHANNEL_IDS wildcard -1 must be used alone",
+      "AELIA_DISCORD_ALLOWED_CHANNEL_IDS wildcard -1 must be used alone",
     );
   }
   if (!env.DISCORD_SELFBOT_TOKEN || !env.DISCORD_SELFBOT_TOKEN.trim()) {
@@ -48,26 +48,26 @@ function loadConfig(env = process.env) {
     projectRoot,
     valueOr(
       env,
-      "POLYVERSE_DISCORD_STATE_PATH",
+      "AELIA_DISCORD_STATE_PATH",
       gate.state_path,
-      "data/v2/discord-selfbot-journal.jsonl",
+      "data/discord-selfbot-journal.jsonl",
     ),
   );
   const requestTimeoutMs = parseInteger(
     valueOr(
       env,
-      "POLYVERSE_DISCORD_KERNEL_TIMEOUT_MS",
+      "AELIA_DISCORD_KERNEL_TIMEOUT_MS",
       gate.request_timeout_ms,
       180000,
     ),
     180000,
     1000,
     600000,
-    "POLYVERSE_DISCORD_KERNEL_TIMEOUT_MS",
+    "AELIA_DISCORD_KERNEL_TIMEOUT_MS",
   );
   const adapterMode = valueOr(
     env,
-    "POLYVERSE_DISCORD_ADAPTER_MODE",
+    "AELIA_DISCORD_ADAPTER_MODE",
     gate.mode,
     "shadow",
   );
@@ -85,25 +85,25 @@ function loadConfig(env = process.env) {
     allowedConversationIds: allowedChannelIds,
     allowAllChannels,
     allowedUserIds: parseIds(
-      valueOr(env, "POLYVERSE_DISCORD_ALLOWED_USER_IDS", gate.allowed_actor_ids),
+      valueOr(env, "AELIA_DISCORD_ALLOWED_USER_IDS", gate.allowed_actor_ids),
     ),
     sendEnabled,
     adapterMode,
     runtimeUrl: valueOr(
       env,
-      "POLYVERSE_RUNTIME_URL",
+      "AELIA_RUNTIME_URL",
       runtime.public_url,
       `http://${runtime.host || "127.0.0.1"}:${runtime.port || 8787}`,
     ),
-    runtimeGateToken: env.POLYVERSE_RUNTIME_GATE_TOKEN?.trim() || null,
+    runtimeGateToken: env.AELIA_RUNTIME_GATE_TOKEN?.trim() || null,
     secretEnvKeys: ["DISCORD_SELFBOT_TOKEN"],
-    connectorEnvPrefixes: ["POLYVERSE_DISCORD_"],
+    connectorEnvPrefixes: ["AELIA_DISCORD_"],
     maxSendsPerHour: parseInteger(
-      valueOr(env, "POLYVERSE_DISCORD_MAX_SENDS_PER_HOUR", gate.max_sends_per_hour, 5),
+      valueOr(env, "AELIA_DISCORD_MAX_SENDS_PER_HOUR", gate.max_sends_per_hour, 5),
       5,
       1,
       1000,
-      "POLYVERSE_DISCORD_MAX_SENDS_PER_HOUR",
+      "AELIA_DISCORD_MAX_SENDS_PER_HOUR",
     ),
     kernelTimeoutMs: requestTimeoutMs,
     requestTimeoutMs,

@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.adapters.conformance import ConnectorReadinessPolicy
-from polyverse.contracts.connector import (
+from aelia.adapters.conformance import ConnectorReadinessPolicy
+from aelia.contracts.connector import (
     CURRENT_CONNECTOR_CAPABILITY_SCHEMA_VERSION,
     ConnectorCapabilities,
 )
-from polyverse.contracts.events import Platform
+from aelia.contracts.events import Platform
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 

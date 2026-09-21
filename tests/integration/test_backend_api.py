@@ -9,19 +9,19 @@ import httpx
 import pytest
 from pydantic import SecretStr
 
-from polyverse.app.config import GateSettings, LlmProvider, Settings
-from polyverse.backend.api import create_app
-from polyverse.backend.application import RuntimeApplication
-from polyverse.contracts.actions import LanguageGenerationResult, OutboundAction
-from polyverse.contracts.adapter import AdapterInboundEnvelope, AdapterMode
-from polyverse.contracts.connector import (
+from aelia.app.config import GateSettings, LlmProvider, Settings
+from aelia.backend.api import create_app
+from aelia.backend.application import RuntimeApplication
+from aelia.contracts.actions import LanguageGenerationResult, OutboundAction
+from aelia.contracts.adapter import AdapterInboundEnvelope, AdapterMode
+from aelia.contracts.connector import (
     CURRENT_EXTERNAL_RECEIPT_SCHEMA_VERSION,
     ExternalDeliveryReceipt,
     ExternalReceiptStatus,
 )
-from polyverse.contracts.events import InboundEvent, Platform
-from polyverse.persona.models import PersonaView
-from polyverse.storage.repositories import ConcurrentStateError
+from aelia.contracts.events import InboundEvent, Platform
+from aelia.persona.models import PersonaView
+from aelia.storage.repositories import ConcurrentStateError
 from tests.helpers import FixtureTextLanguageGenerator, make_adapter_envelope
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -38,7 +38,7 @@ def runtime_settings(
         _env_file=None,
         llm_provider=LlmProvider.MOCK,
         database_path=tmp_path / "backend.db",
-        persona_manifest_path=PROJECT_ROOT / "src/polyverse/persona/source/manifest.json",
+        persona_manifest_path=PROJECT_ROOT / "src/aelia/persona/source/manifest.json",
         agent_actor_id="agent-001",
         platforms={
             "discord_selfbot": GateSettings(

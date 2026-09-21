@@ -5,8 +5,8 @@ import json
 import pytest
 from pydantic import SecretStr, ValidationError
 
-from polyverse.app.config import LlmProvider, Settings
-from polyverse.contracts.adapter import AdapterMode
+from aelia.app.config import LlmProvider, Settings
+from aelia.contracts.adapter import AdapterMode
 
 
 def test_unknown_configuration_key_is_rejected() -> None:

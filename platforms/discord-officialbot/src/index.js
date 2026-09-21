@@ -15,7 +15,7 @@ const { DiscordOfficialbotConnector } = require("./connector");
 const projectRoot = path.resolve(__dirname, "../../..");
 dotenv.config({
   path:
-    process.env.POLYVERSE_DISCORD_OFFICIAL_ENV_FILE ||
+    process.env.AELIA_DISCORD_OFFICIAL_ENV_FILE ||
     path.join(projectRoot, "platforms/discord-officialbot/.env"),
   quiet: true,
 });

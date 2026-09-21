@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from polyverse.cognition.attention import AttentionPolicy
-from polyverse.contracts.events import ChannelType, ReplyReference
-from polyverse.contracts.observation import ObservationSnapshot, RecentParticipation
-from polyverse.contracts.participation import (
+from aelia.cognition.attention import AttentionPolicy
+from aelia.contracts.events import ChannelType, ReplyReference
+from aelia.contracts.observation import ObservationSnapshot, RecentParticipation
+from aelia.contracts.participation import (
     AttentionLevel,
     ParticipationOutcome,
     ProcessingMode,
 )
-from polyverse.models.cognition import InternalState
+from aelia.models.cognition import InternalState
 from tests.helpers import make_event
 
 AGENT_ID = "agent-001"

@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.adapters.repository import AdapterConflictError
-from polyverse.adapters.runtime import CliKernelAdapter, MockAdapterTransport
-from polyverse.contracts.adapter import (
+from aelia.adapters.repository import AdapterConflictError
+from aelia.adapters.runtime import CliKernelAdapter, MockAdapterTransport
+from aelia.contracts.adapter import (
     AdapterDeliveryReceipt,
     AdapterMode,
     AdapterOutboundCommand,
@@ -15,13 +15,13 @@ from polyverse.contracts.adapter import (
     DispatchOutcome,
     DispatchState,
 )
-from polyverse.contracts.connector import (
+from aelia.contracts.connector import (
     CURRENT_EXTERNAL_RECEIPT_SCHEMA_VERSION,
     ExternalDeliveryReceipt,
     ExternalReceiptStatus,
 )
-from polyverse.contracts.events import ChannelType, Platform
-from polyverse.runtime.ports import MockLanguageGenerator
+from aelia.contracts.events import ChannelType, Platform
+from aelia.runtime.ports import MockLanguageGenerator
 from tests.helpers import (
     make_adapter,
     make_adapter_envelope,

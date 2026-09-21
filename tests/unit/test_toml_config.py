@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.app.config import LlmProvider, load_settings
-from polyverse.contracts.adapter import AdapterMode
+from aelia.app.config import LlmProvider, load_settings
+from aelia.contracts.adapter import AdapterMode
 
 
 def test_normal_configuration_loads_from_toml_and_dotenv_is_secrets_only(
@@ -22,7 +22,7 @@ max_request_bytes = 1048576
 
 [storage]
 database_path = "data/test.db"
-persona_manifest_path = "src/polyverse/persona/source/manifest.json"
+persona_manifest_path = "src/aelia/persona/source/manifest.json"
 conversation_buffer_limit = 50
 recent_participation_limit = 5
 sqlite_busy_timeout_ms = 1000
@@ -74,7 +74,7 @@ request_timeout_ms = 120000
     )
     env_path = tmp_path / ".env"
     env_path.write_text(
-        "POLYVERSE_LLM_API_KEY=test-secret\nPOLYVERSE_AGENT_ACTOR_ID=must-not-override-toml\n",
+        "AELIA_LLM_API_KEY=test-secret\nAELIA_AGENT_ACTOR_ID=must-not-override-toml\n",
         encoding="utf-8",
     )
 

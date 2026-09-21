@@ -6,7 +6,7 @@ const { loadConfig, redactedConfigStatus } = require("./config");
 
 function resolveEnvFile(env, projectRoot) {
   return (
-    env.POLYVERSE_DISCORD_ENV_FILE ||
+    env.AELIA_DISCORD_ENV_FILE ||
     path.join(projectRoot, "platforms/discord-selfbot/.env")
   );
 }

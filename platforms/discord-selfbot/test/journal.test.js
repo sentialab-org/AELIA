@@ -8,7 +8,7 @@ const path = require("node:path");
 const { DeliveryJournal } = require("../src/journal");
 
 test("journal persists an attempt before a send and reloads its receipt", () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "polyverse-journal-"));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aelia-journal-"));
   const filePath = path.join(directory, "journal.jsonl");
   const command = { command_id: "command-1", idempotency_key: "key-1" };
   const journal = new DeliveryJournal(filePath);

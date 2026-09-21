@@ -5,15 +5,15 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.contracts.events import EventType
-from polyverse.models.autonomy import (
+from aelia.contracts.events import EventType
+from aelia.models.autonomy import (
     GuardrailOutcome,
     InitiativeType,
     InternalTriggerType,
     OptOutScope,
 )
-from polyverse.runtime.orchestrator import AUTONOMY_ORCHESTRATOR_VERSION
-from polyverse.runtime.replay import ReplayService
+from aelia.runtime.orchestrator import AUTONOMY_ORCHESTRATOR_VERSION
+from aelia.runtime.replay import ReplayService
 from tests.helpers import (
     make_autonomy,
     make_autonomy_config,

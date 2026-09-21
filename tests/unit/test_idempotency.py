@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.storage.repositories import EventConflictError
+from aelia.storage.repositories import EventConflictError
 from tests.helpers import make_event, make_foundation
 
 

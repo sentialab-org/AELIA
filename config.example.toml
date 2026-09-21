@@ -7,14 +7,14 @@ log_level = "INFO"
 max_request_bytes = 5242880
 
 [storage]
-database_path = "data/v2/polyverse.db"
-persona_manifest_path = "src/polyverse/persona/source/manifest.json"
+database_path = "data/aelia.db"
+persona_manifest_path = "src/aelia/persona/source/manifest.json"
 conversation_buffer_limit = 100
 recent_participation_limit = 10
 sqlite_busy_timeout_ms = 5000
 
 [agent]
-actor_id = "polyverse-agent"
+actor_id = "aelia"
 
 [autonomy]
 mode = "shadow"
@@ -53,7 +53,7 @@ allowed_conversation_ids = ["replace-with-channel-id"]
 allowed_actor_ids = []
 send_enabled = false
 max_sends_per_hour = 5
-state_path = "data/v2/discord-selfbot-journal.jsonl"
+state_path = "data/discord-selfbot-journal.jsonl"
 request_timeout_ms = 180000
 
 [platforms.discord_officialbot]
@@ -65,7 +65,7 @@ allowed_conversation_ids = ["replace-with-channel-id"]
 allowed_actor_ids = []
 send_enabled = false
 max_sends_per_hour = 5
-state_path = "data/v2/discord-officialbot-journal.jsonl"
+state_path = "data/discord-officialbot-journal.jsonl"
 request_timeout_ms = 180000
 
 [platforms.telegram_officialbot]
@@ -77,7 +77,7 @@ allowed_conversation_ids = ["replace-with-chat-id"]
 allowed_actor_ids = []
 send_enabled = false
 max_sends_per_hour = 5
-state_path = "data/v2/telegram-officialbot-journal.jsonl"
+state_path = "data/telegram-officialbot-journal.jsonl"
 request_timeout_ms = 180000
 api_base = "https://api.telegram.org"
 poll_timeout_seconds = 30

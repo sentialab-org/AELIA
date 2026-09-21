@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from polyverse.cognition.conversation import ConversationPolicy
-from polyverse.contracts.events import ReplyReference
-from polyverse.contracts.observation import ObservationSnapshot
-from polyverse.models.conversation import TurnOwnership
+from aelia.cognition.conversation import ConversationPolicy
+from aelia.contracts.events import ReplyReference
+from aelia.contracts.observation import ObservationSnapshot
+from aelia.models.conversation import TurnOwnership
 from tests.helpers import make_event
 
 

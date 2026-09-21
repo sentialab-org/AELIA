@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.contracts.events import ChannelType
-from polyverse.models.goals import GoalStatus
-from polyverse.models.memory import (
+from aelia.contracts.events import ChannelType
+from aelia.models.goals import GoalStatus
+from aelia.models.memory import (
     LearningTarget,
     MemoryCategory,
     MemoryValidationStatus,
@@ -12,14 +12,14 @@ from polyverse.models.memory import (
     ProposalStatus,
     ReflectionTriggerType,
 )
-from polyverse.runtime.orchestrator import (
+from aelia.runtime.orchestrator import (
     MEMORY_ORCHESTRATOR_VERSION,
     MemoryOrchestrator,
 )
-from polyverse.runtime.ports import FailingExecutionPort
-from polyverse.runtime.replay import ReplayService
-from polyverse.storage.database import Database
-from polyverse.storage.repositories import SqliteKernelRepository
+from aelia.runtime.ports import FailingExecutionPort
+from aelia.runtime.replay import ReplayService
+from aelia.storage.database import Database
+from aelia.storage.repositories import SqliteKernelRepository
 from tests.helpers import make_event, make_memory
 
 

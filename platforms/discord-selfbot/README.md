@@ -1,6 +1,6 @@
 # Discord self-bot connector
 
-This is an isolated Node.js platform gate for Polyverse V2. It normalizes Discord
+This is an isolated Node.js platform gate for AELIA. It normalizes Discord
 events and delivers Discord commands, while the independent Python runtime
 backend owns cognition, memory, model calls, persistence, and the outbox.
 
@@ -79,7 +79,7 @@ policy remains the final decision-maker.
 The capability manifest can be checked without a Discord credential:
 
 ```bash
-uv run polyverse adapter connector-preflight \
+uv run aelia adapter connector-preflight \
   platforms/discord-selfbot/capabilities.json
 ```
 

@@ -1,8 +1,8 @@
 {
-  "name": "@polyverse/discord-officialbot-connector",
+  "name": "@aelia/discord-officialbot-connector",
   "version": "0.1.0",
   "private": true,
-  "description": "Official Discord bot connector for the Polyverse V2 adapter boundary",
+  "description": "Official Discord bot connector for the AELIA adapter boundary",
   "main": "src/index.js",
   "scripts": {
     "check": "node --check src/config.js && node --check src/contracts.js && node --check src/connector.js && node --check src/index.js",

@@ -1,6 +1,6 @@
-# Polyverse Agent
+# AELIA Agent
 
-Polyverse Agent V2 is the active development line: a strictly typed Python
+AELIA is the active development line: a strictly typed Python
 cognitive kernel built around explicit observation, belief, world/self/social
 models, appraisal, internal dynamics, goals, participation, action policy,
 memory, learning, and shadow-only autonomy.
@@ -17,16 +17,16 @@ Requirements: Python 3.12+ and
 ```bash
 cp config.example.toml config.toml
 cp .env.example .env
-make v2-sync
-make v2-doctor
-make v2-init
-make v2-quality
+make sync
+make doctor
+make init
+make quality
 ```
 
 Ingest the deterministic direct-mention fixture:
 
 ```bash
-uv run --frozen polyverse event ingest \
+uv run --frozen aelia event ingest \
   tests/fixtures/events/direct_mention.json
 ```
 
@@ -43,7 +43,7 @@ belong only in ignored `.env`. Validate the configured endpoint without
 sending a chat completion:
 
 ```bash
-uv run --frozen polyverse llm doctor --probe
+uv run --frozen aelia llm doctor --probe
 ```
 
 No live platform is enabled implicitly. Three isolated Node.js connectors are
@@ -86,7 +86,7 @@ for each request.
 External connector requirements are checked separately:
 
 ```bash
-uv run --frozen polyverse adapter connector-preflight \
+uv run --frozen aelia adapter connector-preflight \
   tests/fixtures/adapter/connector_capabilities.json
 ```
 
@@ -98,13 +98,13 @@ make platforms-test
 
 ## Evidence and operating docs
 
-- [Báo cáo hiện trạng kiến trúc V2](docs/v2/BAO_CAO_HIEN_TRANG_KIEN_TRUC_V2.md)
-- [Implementation status](docs/v2/IMPLEMENTATION_STATUS.md)
-- [Requirement evidence](docs/v2/REQUIREMENT_EVIDENCE.md)
-- [Final local audit](docs/v2/FINAL_AUDIT.md)
-- [Definition of Done](docs/v2/DEFINITION_OF_DONE.md)
-- [Adapter cutover/rollback](docs/v2/P8_CUTOVER_RUNBOOK.md)
-- [External connector acceptance](docs/v2/CONNECTOR_ACCEPTANCE.md)
+- [Báo cáo hiện trạng kiến trúc V2](docs/BAO_CAO_HIEN_TRANG_KIEN_TRUC_V2.md)
+- [Implementation status](docs/IMPLEMENTATION_STATUS.md)
+- [Requirement evidence](docs/REQUIREMENT_EVIDENCE.md)
+- [Final local audit](docs/FINAL_AUDIT.md)
+- [Definition of Done](docs/DEFINITION_OF_DONE.md)
+- [Adapter cutover/rollback](docs/P8_CUTOVER_RUNBOOK.md)
+- [External connector acceptance](docs/CONNECTOR_ACCEPTANCE.md)
 
 The complete V1 environment, including its `.env`, settings, config, prompts,
 data, Cargo workspace and legacy Makefile, lives under

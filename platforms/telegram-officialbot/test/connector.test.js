@@ -56,7 +56,7 @@ function fixture() {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "telegram-bot-test-"));
   const connector = new TelegramOfficialbotConnector({
     api,
-    bot: { id: 99, username: "PolyverseBot" },
+    bot: { id: 99, username: "AeliaBot" },
     config: {
       adapterId: "telegram-officialbot-v2",
       connectorId: "telegram-officialbot-v2",

@@ -6,20 +6,20 @@ from pathlib import Path
 import httpx
 from pydantic import SecretStr
 
-from polyverse.contracts.actions import (
+from aelia.contracts.actions import (
     ExecutionStatus,
     LanguageGenerationStatus,
 )
-from polyverse.contracts.traces import CycleStatus
-from polyverse.llm.config import (
+from aelia.contracts.traces import CycleStatus
+from aelia.llm.config import (
     LlmStructuredOutputMode,
     LlmThinkingMode,
     OpenAICompatibleConfig,
 )
-from polyverse.llm.openai_compatible import (
+from aelia.llm.openai_compatible import (
     OpenAICompatibleLanguageGenerator,
 )
-from polyverse.runtime.replay import ReplayService
+from aelia.runtime.replay import ReplayService
 from tests.helpers import make_action, make_event
 
 
@@ -95,7 +95,7 @@ async def test_openai_compatible_generation_is_structured_and_replayable(
     assert seen_payload["response_format"] == {
         "type": "json_schema",
         "json_schema": {
-            "name": "polyverse_language_realization",
+            "name": "aelia_language_realization",
             "strict": True,
             "schema": {
                 "type": "object",

@@ -7,7 +7,7 @@ const { loadConfig } = require("../src/config");
 test("official Discord bot config defaults to dry-run", () => {
   const config = loadConfig({
     DISCORD_BOT_TOKEN: "test-token",
-    POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "channel-1",
+    AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "channel-1",
   });
 
   assert.equal(config.sendEnabled, false);
@@ -23,7 +23,7 @@ test("official Discord bot config requires a token and allowlist", () => {
   assert.throws(
     () =>
       loadConfig({
-        POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "channel-1",
+        AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "channel-1",
       }),
     /DISCORD_BOT_TOKEN/,
   );
@@ -32,7 +32,7 @@ test("official Discord bot config requires a token and allowlist", () => {
 test("official Discord bot config accepts an exclusive all-channel wildcard", () => {
   const config = loadConfig({
     DISCORD_BOT_TOKEN: "test-token",
-    POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "-1",
+    AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "-1",
   });
 
   assert.equal(config.allowAllChannels, true);
@@ -40,7 +40,7 @@ test("official Discord bot config accepts an exclusive all-channel wildcard", ()
     () =>
       loadConfig({
         DISCORD_BOT_TOKEN: "test-token",
-        POLYVERSE_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "-1,channel-1",
+        AELIA_DISCORD_OFFICIAL_ALLOWED_CHANNEL_IDS: "-1,channel-1",
       }),
     /wildcard -1 must be used alone/,
   );

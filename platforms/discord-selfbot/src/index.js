@@ -10,7 +10,7 @@ const { RuntimeClient } = require("../../node-common/runtime-client");
 
 const projectRoot = path.resolve(__dirname, "../../..");
 const envFile =
-  process.env.POLYVERSE_DISCORD_ENV_FILE ||
+  process.env.AELIA_DISCORD_ENV_FILE ||
   path.join(projectRoot, "platforms/discord-selfbot/.env");
 dotenv.config({ path: envFile, quiet: true });
 

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.app.config import Environment, Settings
-from polyverse.contracts.adapter import AdapterMode
-from polyverse.models.autonomy import AutonomyMode
+from aelia.app.config import Environment, Settings
+from aelia.contracts.adapter import AdapterMode
+from aelia.models.autonomy import AutonomyMode
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -31,18 +31,18 @@ def test_environment_example_is_complete_and_safe_by_default() -> None:
 
 def test_all_environment_examples_contain_secrets_only() -> None:
     assert _declared_names(PROJECT_ROOT / ".env.example") == {
-        "POLYVERSE_LLM_API_KEY",
-        "POLYVERSE_RUNTIME_GATE_TOKEN",
+        "AELIA_LLM_API_KEY",
+        "AELIA_RUNTIME_GATE_TOKEN",
     }
     assert _declared_names(PROJECT_ROOT / "platforms/discord-selfbot/.env.example") == {
         "DISCORD_SELFBOT_TOKEN",
-        "POLYVERSE_RUNTIME_GATE_TOKEN",
+        "AELIA_RUNTIME_GATE_TOKEN",
     }
     assert _declared_names(PROJECT_ROOT / "platforms/discord-officialbot/.env.example") == {
         "DISCORD_BOT_TOKEN",
-        "POLYVERSE_RUNTIME_GATE_TOKEN",
+        "AELIA_RUNTIME_GATE_TOKEN",
     }
     assert _declared_names(PROJECT_ROOT / "platforms/telegram-officialbot/.env.example") == {
         "TELEGRAM_BOT_TOKEN",
-        "POLYVERSE_RUNTIME_GATE_TOKEN",
+        "AELIA_RUNTIME_GATE_TOKEN",
     }

@@ -4,12 +4,12 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
-from polyverse.autonomy.guardrails import AutonomyGuardrails
-from polyverse.autonomy.initiative import InternalTriggerPolicy
-from polyverse.contracts.actions import CandidateActionType, RiskClass
-from polyverse.contracts.common import Provenance, ProvenanceKind
-from polyverse.contracts.events import EventType
-from polyverse.models.autonomy import (
+from aelia.autonomy.guardrails import AutonomyGuardrails
+from aelia.autonomy.initiative import InternalTriggerPolicy
+from aelia.contracts.actions import CandidateActionType, RiskClass
+from aelia.contracts.common import Provenance, ProvenanceKind
+from aelia.contracts.events import EventType
+from aelia.models.autonomy import (
     AutonomyMode,
     AutonomyRuntimeState,
     GuardrailOutcome,
@@ -17,20 +17,20 @@ from polyverse.models.autonomy import (
     InitiativeType,
     InternalTriggerType,
 )
-from polyverse.models.cognition import (
+from aelia.models.cognition import (
     AffectDelta,
     DriveDelta,
     InternalDelta,
     InternalState,
     InternalTransition,
 )
-from polyverse.models.goals import (
+from aelia.models.goals import (
     Goal,
     GoalSource,
     GoalStatus,
     GoalTransition,
 )
-from polyverse.models.memory import OutcomeEvaluation, OutcomeStatus
+from aelia.models.memory import OutcomeEvaluation, OutcomeStatus
 from tests.helpers import make_autonomy_config, make_event
 
 TIMESTAMP = datetime(2026, 7, 30, 3, 0, tzinfo=UTC)

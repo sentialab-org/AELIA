@@ -2,27 +2,27 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.cognition.appraisal import AppraisalPolicy
-from polyverse.cognition.attention import AttentionPolicy
-from polyverse.cognition.dynamics import (
+from aelia.cognition.appraisal import AppraisalPolicy
+from aelia.cognition.attention import AttentionPolicy
+from aelia.cognition.dynamics import (
     InternalDynamicsPolicy,
     InternalParticipationPolicy,
 )
-from polyverse.cognition.memory import LearningPolicy
-from polyverse.cognition.participation import ParticipationPolicy
-from polyverse.cognition.perception import PerceptionPolicy
-from polyverse.cognition.social import SocialPolicy
-from polyverse.contracts.events import InboundEvent
-from polyverse.contracts.observation import ObservationSnapshot
-from polyverse.contracts.participation import AttentionResult
-from polyverse.models.cognition import AppraisalResult, InternalState, InternalTransition
-from polyverse.models.perception import PerceptionResult
-from polyverse.models.social import SocialState, SocialTransition
-from polyverse.persona.disclosure import DisclosureGate
-from polyverse.persona.loader import PersonaSourceLoader
-from polyverse.persona.models import PersonaView
-from polyverse.persona.participation import PersonaParticipationPolicy
-from polyverse.persona.selector import PersonaViewSelector
+from aelia.cognition.memory import LearningPolicy
+from aelia.cognition.participation import ParticipationPolicy
+from aelia.cognition.perception import PerceptionPolicy
+from aelia.cognition.social import SocialPolicy
+from aelia.contracts.events import InboundEvent
+from aelia.contracts.observation import ObservationSnapshot
+from aelia.contracts.participation import AttentionResult
+from aelia.models.cognition import AppraisalResult, InternalState, InternalTransition
+from aelia.models.perception import PerceptionResult
+from aelia.models.social import SocialState, SocialTransition
+from aelia.persona.disclosure import DisclosureGate
+from aelia.persona.loader import PersonaSourceLoader
+from aelia.persona.models import PersonaView
+from aelia.persona.participation import PersonaParticipationPolicy
+from aelia.persona.selector import PersonaViewSelector
 from tests.helpers import make_event
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -41,7 +41,7 @@ def _pipeline(
     InternalTransition,
 ]:
     specification = PersonaSourceLoader(
-        PROJECT_ROOT / "src/polyverse/persona/source/manifest.json",
+        PROJECT_ROOT / "src/aelia/persona/source/manifest.json",
         repository_root=PROJECT_ROOT,
     ).load_specification()
     observation = ObservationSnapshot(

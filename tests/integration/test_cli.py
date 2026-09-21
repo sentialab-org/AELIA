@@ -7,14 +7,14 @@ from typing import Any
 
 import pytest
 
-from polyverse.cli import _build_parser, _run
-from polyverse.contracts.adapter import AdapterMode
-from polyverse.contracts.connector import (
+from aelia.cli import _build_parser, _run
+from aelia.contracts.adapter import AdapterMode
+from aelia.contracts.connector import (
     CURRENT_EXTERNAL_RECEIPT_SCHEMA_VERSION,
     ExternalDeliveryReceipt,
     ExternalReceiptStatus,
 )
-from polyverse.contracts.events import Platform
+from aelia.contracts.events import Platform
 from tests.helpers import make_adapter, make_adapter_envelope
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -28,11 +28,11 @@ async def test_cli_fixed_content_canary_is_explicit_and_side_effect_free(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     monkeypatch.chdir(PROJECT_ROOT)
-    monkeypatch.setenv("POLYVERSE_DATABASE_PATH", str(tmp_path / "canary.db"))
-    monkeypatch.setenv("POLYVERSE_AGENT_ACTOR_ID", "agent-001")
-    monkeypatch.setenv("POLYVERSE_ADAPTER_MODE", "test_canary")
+    monkeypatch.setenv("AELIA_DATABASE_PATH", str(tmp_path / "canary.db"))
+    monkeypatch.setenv("AELIA_AGENT_ACTOR_ID", "agent-001")
+    monkeypatch.setenv("AELIA_ADAPTER_MODE", "test_canary")
     monkeypatch.setenv(
-        "POLYVERSE_ADAPTER_CANARY_CONVERSATION_IDS",
+        "AELIA_ADAPTER_CANARY_CONVERSATION_IDS",
         '["fixture-adapter-conversation-001"]',
     )
     args = _build_parser().parse_args(
@@ -65,8 +65,8 @@ async def test_cli_rejects_test_content_in_shadow_mode(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.chdir(PROJECT_ROOT)
-    monkeypatch.setenv("POLYVERSE_DATABASE_PATH", str(tmp_path / "shadow.db"))
-    monkeypatch.setenv("POLYVERSE_ADAPTER_MODE", "shadow")
+    monkeypatch.setenv("AELIA_DATABASE_PATH", str(tmp_path / "shadow.db"))
+    monkeypatch.setenv("AELIA_ADAPTER_MODE", "shadow")
     args = _build_parser().parse_args(
         [
             "adapter",
@@ -77,7 +77,7 @@ async def test_cli_rejects_test_content_in_shadow_mode(
         ]
     )
 
-    with pytest.raises(ValueError, match="requires POLYVERSE_ADAPTER_MODE=test_canary"):
+    with pytest.raises(ValueError, match="requires AELIA_ADAPTER_MODE=test_canary"):
         await _run(args)
 
 
@@ -143,8 +143,8 @@ async def test_cli_records_external_connector_receipt(
 
     monkeypatch.chdir(PROJECT_ROOT)
     monkeypatch.setenv(
-        "POLYVERSE_DATABASE_PATH",
-        str(database_directory / "polyverse-adapter-test.db"),
+        "AELIA_DATABASE_PATH",
+        str(database_directory / "aelia-adapter-test.db"),
     )
     args = _build_parser().parse_args(["adapter", "external-receipt", str(receipt_path)])
 
@@ -163,10 +163,10 @@ async def test_cli_llm_doctor_redacts_the_api_key(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     monkeypatch.chdir(PROJECT_ROOT)
-    monkeypatch.setenv("POLYVERSE_LLM_PROVIDER", "openai_compatible")
-    monkeypatch.setenv("POLYVERSE_LLM_API_BASE", "https://provider.example.test/v1")
-    monkeypatch.setenv("POLYVERSE_LLM_API_KEY", "doctor-test-secret")
-    monkeypatch.setenv("POLYVERSE_LLM_MODEL", "test-model")
+    monkeypatch.setenv("AELIA_LLM_PROVIDER", "openai_compatible")
+    monkeypatch.setenv("AELIA_LLM_API_BASE", "https://provider.example.test/v1")
+    monkeypatch.setenv("AELIA_LLM_API_KEY", "doctor-test-secret")
+    monkeypatch.setenv("AELIA_LLM_MODEL", "test-model")
     args = _build_parser().parse_args(["llm", "doctor"])
 
     exit_code = await _run(args)

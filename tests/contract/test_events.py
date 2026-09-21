@@ -6,7 +6,7 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
-from polyverse.contracts.events import InboundEvent
+from aelia.contracts.events import InboundEvent
 from tests.helpers import make_event
 
 

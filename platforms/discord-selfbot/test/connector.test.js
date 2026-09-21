@@ -68,7 +68,7 @@ function fixture({ allowAllChannels = false, allowedChannelIds } = {}) {
       return { receipt };
     },
   };
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "polyverse-connector-"));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aelia-connector-"));
   const config = {
     adapterId: "discord-selfbot-v2",
     connectorId: "discord-selfbot-v2",

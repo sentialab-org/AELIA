@@ -2,25 +2,25 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from polyverse.cognition.attention import AttentionPolicy
-from polyverse.cognition.participation import ParticipationPolicy
-from polyverse.contracts.events import ChannelType
-from polyverse.contracts.observation import ObservationSnapshot
-from polyverse.persona.disclosure import DisclosureGate
-from polyverse.persona.loader import PersonaSourceLoader
-from polyverse.persona.models import (
+from aelia.cognition.attention import AttentionPolicy
+from aelia.cognition.participation import ParticipationPolicy
+from aelia.contracts.events import ChannelType
+from aelia.contracts.observation import ObservationSnapshot
+from aelia.persona.disclosure import DisclosureGate
+from aelia.persona.loader import PersonaSourceLoader
+from aelia.persona.models import (
     DisclosureClass,
     DisclosureGateDecision,
     PersonaSpecification,
     RelationshipTier,
 )
-from polyverse.persona.participation import PersonaParticipationPolicy
-from polyverse.persona.selector import PersonaViewSelector
-from polyverse.runtime.ports import MockLanguagePort
+from aelia.persona.participation import PersonaParticipationPolicy
+from aelia.persona.selector import PersonaViewSelector
+from aelia.runtime.ports import MockLanguagePort
 from tests.helpers import make_event
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = PROJECT_ROOT / "src/polyverse/persona/source/manifest.json"
+MANIFEST_PATH = PROJECT_ROOT / "src/aelia/persona/source/manifest.json"
 
 
 def _specification() -> PersonaSpecification:

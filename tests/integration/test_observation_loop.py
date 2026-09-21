@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from polyverse.contracts.events import ReplyReference
-from polyverse.contracts.participation import ParticipationDecision, ParticipationOutcome
-from polyverse.runtime.orchestrator import ObservationOrchestrator
-from polyverse.runtime.ports import MockExecutionPort, MockLanguagePort
-from polyverse.runtime.replay import ReplayService
-from polyverse.storage.repositories import ConcurrentStateError
+from aelia.contracts.events import ReplyReference
+from aelia.contracts.participation import ParticipationDecision, ParticipationOutcome
+from aelia.runtime.orchestrator import ObservationOrchestrator
+from aelia.runtime.ports import MockExecutionPort, MockLanguagePort
+from aelia.runtime.replay import ReplayService
+from aelia.storage.repositories import ConcurrentStateError
 from tests.helpers import make_event, make_observation
 
 

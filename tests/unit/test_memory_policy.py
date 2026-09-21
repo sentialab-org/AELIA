@@ -5,16 +5,16 @@ from datetime import UTC, datetime
 import pytest
 from pydantic import ValidationError
 
-from polyverse.cognition.memory import MemoryPolicy
-from polyverse.contracts.common import Provenance, ProvenanceKind
-from polyverse.models.cognition import InternalState
-from polyverse.models.memory import (
+from aelia.cognition.memory import MemoryPolicy
+from aelia.contracts.common import Provenance, ProvenanceKind
+from aelia.models.cognition import InternalState
+from aelia.models.memory import (
     MemoryCategory,
     MemoryRecord,
     MemoryValidationStatus,
     MemoryWriteSet,
 )
-from polyverse.models.self_model import SelfModel
+from aelia.models.self_model import SelfModel
 from tests.helpers import make_event
 
 TIMESTAMP = datetime(2026, 7, 30, tzinfo=UTC)

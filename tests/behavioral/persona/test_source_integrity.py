@@ -8,6 +8,18 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST_PATH = PROJECT_ROOT / "src/aelia/persona/source/manifest.json"
 
 
+def test_loader_derives_repository_root_without_an_explicit_hint() -> None:
+    """The production path: every call site omits ``repository_root``.
+
+    The suite otherwise passes the root explicitly everywhere, which would keep
+    the suite green even if the derivation walked to the wrong directory.
+    """
+    loader = PersonaSourceLoader(MANIFEST_PATH)
+
+    assert loader.repository_root == PROJECT_ROOT
+    assert loader.verify_sources().valid is True
+
+
 def test_all_persona_sources_match_recorded_hashes() -> None:
     loader = PersonaSourceLoader(MANIFEST_PATH, repository_root=PROJECT_ROOT)
 

@@ -22,7 +22,9 @@ def _imports(path: Path) -> tuple[str, ...]:
 def test_backend_does_not_import_platform_packages_or_sdks() -> None:
     forbidden = ("platforms.", "discord", "telegram", "telethon", "aiogram")
     violations = []
-    for path in (PYTHON_ROOT / "backend").rglob("*.py"):
+    backend_sources = tuple((PYTHON_ROOT / "backend").rglob("*.py"))
+    assert backend_sources, "expected the backend package to hold Python sources"
+    for path in backend_sources:
         for imported in _imports(path):
             if imported.startswith(forbidden):
                 violations.append(f"{path.relative_to(PROJECT_ROOT)} -> {imported}")
@@ -31,15 +33,17 @@ def test_backend_does_not_import_platform_packages_or_sdks() -> None:
 
 def test_node_gate_production_code_has_no_runtime_process_launcher() -> None:
     forbidden = ("child_process", "spawn(", "exec(", "uv run", "aelia adapter")
+    gate_sources = tuple(
+        path
+        for path in PLATFORM_ROOT.rglob("*.js")
+        if path.is_file()
+        and "node_modules" not in path.parts
+        and "/test/" not in str(path)
+        and not path.name.endswith(".test.js")
+    )
+    assert gate_sources, "expected production JavaScript under platforms/"
     violations = []
-    for path in PLATFORM_ROOT.rglob("*.js"):
-        if (
-            not path.is_file()
-            or "node_modules" in path.parts
-            or "/test/" in str(path)
-            or path.name.endswith(".test.js")
-        ):
-            continue
+    for path in gate_sources:
         source = path.read_text(encoding="utf-8")
         for marker in forbidden:
             if marker in source:

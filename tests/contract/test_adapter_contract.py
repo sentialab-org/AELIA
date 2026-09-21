@@ -88,6 +88,7 @@ def test_core_kernel_does_not_import_adapter_implementation() -> None:
         for path in directory.rglob("*.py")
     ]
 
+    assert core_sources, "expected kernel sources so this check is not vacuous"
     assert all("aelia.adapters" not in source for source in core_sources)
     assert set(AdapterMode) == {
         AdapterMode.SHADOW,

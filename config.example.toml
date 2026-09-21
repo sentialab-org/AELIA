@@ -1,0 +1,83 @@
+[runtime]
+environment = "development"
+host = "127.0.0.1"
+port = 8787
+public_url = "http://127.0.0.1:8787"
+log_level = "INFO"
+max_request_bytes = 5242880
+
+[storage]
+database_path = "data/aelia.db"
+persona_manifest_path = "src/aelia/persona/source/manifest.json"
+conversation_buffer_limit = 100
+recent_participation_limit = 10
+sqlite_busy_timeout_ms = 5000
+
+[agent]
+actor_id = "aelia"
+
+[autonomy]
+mode = "shadow"
+timezone = "Asia/Ho_Chi_Minh"
+quiet_hours_enabled = true
+quiet_start_hour = 22
+quiet_end_hour = 8
+actor_limit_per_hour = 2
+conversation_limit_per_hour = 5
+daily_cost_budget = 10.0
+minimum_expected_value = 0.6
+high_drive_trigger_threshold = 0.8
+
+[adapter]
+mode = "shadow"
+canary_conversation_ids = []
+conversation_limit_per_hour = 5
+
+[llm]
+provider = "mock"
+api_base = "https://provider.example.test/v1"
+model = "provider/model"
+timeout_seconds = 60
+max_attempts = 3
+max_output_tokens = 512
+structured_output_mode = "json_object"
+allow_plain_text_fallback = false
+thinking_mode = "auto"
+
+[platforms.discord_selfbot]
+enabled = false
+adapter_id = "discord-selfbot-v2"
+platform = "discord_selfbot"
+mode = "shadow"
+allowed_conversation_ids = ["replace-with-channel-id"]
+allowed_actor_ids = []
+send_enabled = false
+max_sends_per_hour = 5
+state_path = "data/discord-selfbot-journal.jsonl"
+request_timeout_ms = 180000
+
+[platforms.discord_officialbot]
+enabled = false
+adapter_id = "discord-officialbot-v2"
+platform = "discord"
+mode = "shadow"
+allowed_conversation_ids = ["replace-with-channel-id"]
+allowed_actor_ids = []
+send_enabled = false
+max_sends_per_hour = 5
+state_path = "data/discord-officialbot-journal.jsonl"
+request_timeout_ms = 180000
+
+[platforms.telegram_officialbot]
+enabled = false
+adapter_id = "telegram-officialbot-v2"
+platform = "telegram"
+mode = "shadow"
+allowed_conversation_ids = ["replace-with-chat-id"]
+allowed_actor_ids = []
+send_enabled = false
+max_sends_per_hour = 5
+state_path = "data/telegram-officialbot-journal.jsonl"
+request_timeout_ms = 180000
+api_base = "https://api.telegram.org"
+poll_timeout_seconds = 30

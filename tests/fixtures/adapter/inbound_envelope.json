@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "delivery_id": "fixture-delivery-001",
+  "idempotency_key": "ingress:fixture-delivery-001",
+  "adapter_id": "cli-fixture-adapter",
+  "received_at": "2026-07-30T00:01:00Z",
+  "event": {
+    "schema_version": "2.0.0",
+    "event_id": "fixture-adapter-event-001",
+    "platform": "cli",
+    "conversation_id": "fixture-adapter-conversation-001",
+    "channel_type": "group",
+    "actor_id": "fixture-user-001",
+    "occurred_at": "2026-07-30T00:01:00Z",
+    "event_type": "message_created",
+    "content": "can you help with this code?",
+    "reply_to": null,
+    "mentions": [
+      "agent-001"
+    ],
+    "attachments": [],
+    "permissions": {
+      "can_send_message": true,
+      "can_reply": true,
+      "can_react": true,
+      "is_private": false,
+      "scopes": []
+    },
+    "source_reference": {
+      "adapter": "cli-fixture-adapter",
+      "raw_event_id": "fixture-adapter-event-001",
+      "trace_id": null
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.env
+/target/
+/data/
+node_modules/
+.next/
+.fastembed_cache/
+*.log

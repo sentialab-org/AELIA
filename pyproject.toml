@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "polyverse-agent-v2"
+version = "0.1.0"
+description = "Polyverse Agent V2 cognitive kernel"
+requires-python = ">=3.12"
+dependencies = [
+    "aiosqlite>=0.21,<1",
+    "fastapi>=0.116,<1",
+    "httpx>=0.28,<1",
+    "pydantic>=2.11,<3",
+    "pydantic-settings>=2.10,<3",
+    "uvicorn>=0.35,<1",
+]
+
+[project.scripts]
+polyverse = "polyverse.cli:main"
+polyverse-backend = "polyverse.backend.main:main"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17,<2",
+    "pytest>=8.4,<9",
+    "pytest-asyncio>=1.1,<2",
+    "ruff>=0.12,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/polyverse"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+asyncio_mode = "auto"
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "SIM",
+    "RUF",
+]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+files = ["src", "tests"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["aiosqlite.*"]
+ignore_missing_imports = true

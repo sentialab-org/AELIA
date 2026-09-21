@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "connector_id": "example-discord-connector",
+  "connector_version": "0.1.0",
+  "platform": "discord",
+  "account_model": "authorized-test-account",
+  "inbound_schema_version": "1.0.0",
+  "outbound_schema_version": "1.1.0",
+  "receipt_schema_version": "2.0.0",
+  "supports_idempotency_lookup": true,
+  "supports_canary_allowlist": true,
+  "supports_kill_switch": true,
+  "supports_reconnect_cursor": true,
+  "supports_permission_probe": true,
+  "supports_rate_limit_observation": true,
+  "redacts_secrets": true
+}

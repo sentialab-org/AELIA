@@ -1,0 +1,33 @@
+{
+  "manifest_version": "1.0.0",
+  "persona_id": "ryuuko",
+  "active_source_id": "base.v3",
+  "specification_path": "src/polyverse/persona/source/specification.v1.json",
+  "scenario_catalog_path": "src/polyverse/persona/source/scenarios.v1.json",
+  "sources": [
+    {
+      "source_id": "base.v1",
+      "path": "src/polyverse/persona/source/archive/base.v1.txt",
+      "sha256": "a996b2ac7147ccf6ace7299274bd9a9209a2d763dcfdb42b50f1a6b74653b9a9",
+      "role": "historical"
+    },
+    {
+      "source_id": "base.v2",
+      "path": "src/polyverse/persona/source/archive/base.v2.txt",
+      "sha256": "cc54068b4a78e54086b850c9821ff81a8e68ac3728e5b268b7296e90389f5186",
+      "role": "historical"
+    },
+    {
+      "source_id": "base.v3",
+      "path": "src/polyverse/persona/source/archive/base.v3.txt",
+      "sha256": "968168fa4952ba5d023ddd1a94005ac865e402a3269cbaaa91202531bb998980",
+      "role": "active"
+    },
+    {
+      "source_id": "fallback.short",
+      "path": "src/polyverse/persona/source/archive/fallback.short.txt",
+      "sha256": "0586f403970c40ae649f26dd8d4ffeb5a36a44fc016d4b1c3b48751e9ea16c61",
+      "role": "fallback"
+    }
+  ]
+}

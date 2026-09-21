@@ -1,0 +1,20 @@
+{
+  "name": "@polyverse/discord-selfbot-connector",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Isolated Discord self-bot connector for the Polyverse V2 adapter boundary",
+  "main": "src/index.js",
+  "scripts": {
+    "check": "node --check src/config.js && node --check src/config-doctor.js && node --check src/contracts.js && node --check src/journal.js && node --check src/kernel-client.js && node --check ../node-common/runtime-client.js && node --check src/connector.js && node --check src/index.js",
+    "config:doctor": "node src/config-doctor.js",
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.18"
+  },
+  "dependencies": {
+    "discord.js-selfbot-v13": "3.7.1",
+    "dotenv": "17.4.2"
+  }
+}

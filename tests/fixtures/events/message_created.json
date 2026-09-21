@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0.0",
+  "event_id": "fixture-message-001",
+  "platform": "test",
+  "conversation_id": "fixture-conversation-001",
+  "channel_type": "group",
+  "actor_id": "fixture-user-001",
+  "occurred_at": "2026-07-30T00:00:00Z",
+  "event_type": "message_created",
+  "content": "hello from fixture",
+  "reply_to": null,
+  "mentions": [],
+  "attachments": [],
+  "permissions": {
+    "can_send_message": true,
+    "can_reply": true,
+    "can_react": true,
+    "is_private": false,
+    "scopes": []
+  },
+  "source_reference": {
+    "adapter": "test-fixture",
+    "raw_event_id": "fixture-message-001",
+    "trace_id": null
+  }
+}

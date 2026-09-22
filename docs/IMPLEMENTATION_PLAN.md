@@ -6,10 +6,17 @@
 **V1 role:** Experimental draft and architecture reference, not a behavioral baseline  
 **Preserved product asset:** The Ryuuko persona source and its intended behavioral invariants
 
+> **Historical document.** This plan was written on 2026-07-30, before the
+> project was renamed from Polyverse Agent V2 to AELIA. Prose has been updated to
+> the current name; the milestone identifiers `V2-001` … `V2-010` are kept as
+> historical labels so they still resolve against the plan and commit history.
+> The plan describes intent, not current state — see
+> `.aelia/coordination/CURRENT_STATE.md` for what actually runs.
+
 ## 1. Objective
 
 Build a new Python kernel in which persona, relationship state, internal dynamics,
-participation, and action selection have explicit causal roles. V2 must not be a
+participation, and action selection have explicit causal roles. AELIA must not be a
 line-by-line Rust port and must not reproduce V1's worker topology, state schema,
 storage topology, prompt composition, or event ordering.
 
@@ -28,18 +35,18 @@ deterministic vertical slice that can:
 
 ### 2.1 V1 disposition
 
-- V1 is an experimental draft, not the reference behavior V2 must match.
-- Existing Rust tests do not block V2 and will not be repaired as part of the rewrite.
+- V1 is an experimental draft, not the reference behavior AELIA must match.
+- Existing Rust tests do not block AELIA and will not be repaired as part of the rewrite.
 - V1 message history, graph state, LanceDB data, and numeric state are not migrated.
-- Rust remains readable for code archaeology until V2 has replaced the useful platform paths.
+- Rust remains readable for code archaeology until AELIA has replaced the useful platform paths.
 - No Rust module is ported line by line.
 
 ### 2.2 Persona disposition
 
 - `legacy/v1-rust/prompts/persona/base.v3.txt` is the archived active V1 persona
-  source; V2 consumes its byte-preserved, hash-bound copy.
+  source; AELIA consumes its byte-preserved, hash-bound copy.
 - All existing persona source versions are preserved verbatim and treated as immutable evidence.
-- The source prompt is not copied into V2 as the sole system prompt.
+- The source prompt is not copied into AELIA as the sole system prompt.
 - Persona is decomposed into structured identity, values, boundaries, disclosure policy,
   relationship dynamics, participation preferences, communication style, and presentation policy.
 - Every structured persona rule must reference the source passage from which it was derived.
@@ -64,7 +71,7 @@ deterministic vertical slice that can:
 
 ## 3. What Is Reused From V1
 
-| V1 component | V2 treatment | Reason |
+| V1 component | AELIA treatment | Reason |
 |---|---|---|
 | Persona prompt versions | Preserve as source artifacts | Primary product asset |
 | Platform processes separated from core | Keep concept | Correct operational boundary |
@@ -284,7 +291,7 @@ Early phases may leave later artifacts empty, but the trace schema remains versi
 
 Tasks:
 
-1. Copy all persona source versions into an immutable V2 source directory.
+1. Copy all persona source versions into an immutable AELIA source directory.
 2. Record SHA-256 hashes and identify `base.v3.txt` as the active source.
 3. Create structured persona schemas:
    - identity anchors;
@@ -520,7 +527,7 @@ Acceptance:
 ### Phase P8 — Platform adapter and cutover
 
 **Estimate:** 4–8 engineering days per initial platform  
-**Purpose:** Connect V2 without coupling the kernel to an SDK.
+**Purpose:** Connect AELIA without coupling the kernel to an SDK.
 
 Tasks:
 
@@ -529,7 +536,7 @@ Tasks:
 3. Choose either:
    - a temporary translator around the V1 relay; or
    - a new TypeScript/Python adapter.
-4. Run V2 in shadow mode.
+4. Run AELIA in shadow mode.
 5. Enable one test channel, then one canary channel.
 6. Remove production dependency on Rust only after guardrail and recovery gates pass.
 
@@ -673,7 +680,7 @@ A phase cannot close unless:
 
 ## 12. Non-Goals
 
-The early V2 implementation will not:
+The early AELIA implementation will not:
 
 - migrate V1 messages, graph, episodic vectors, or numeric state;
 - reproduce V1 responses;
@@ -690,7 +697,7 @@ The early V2 implementation will not:
 | Risk | Control |
 |---|---|
 | Persona becomes a large prompt again | Immutable source plus structured rules, source references, and behavioral tests |
-| V2 repeats abstraction sprawl | Only create modules required by the current vertical slice |
+| AELIA repeats abstraction sprawl | Only create modules required by the current vertical slice |
 | Core becomes nondeterministic | Sequential transitions and recorded model outputs |
 | LLM regains policy authority | Structured proposal ports and independent policy validation |
 | Social state becomes message-count closeness | Evidence-based relationship transitions and inertia tests |
@@ -701,7 +708,7 @@ The early V2 implementation will not:
 
 ## 14. Overall Completion Criteria
 
-V2 can replace V1 when:
+AELIA can replace V1 when:
 
 - persona behavioral suite passes;
 - ingest, idempotency, replay, and crash recovery pass;

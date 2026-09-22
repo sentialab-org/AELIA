@@ -1,6 +1,17 @@
 # AELIA — Implementation Status
 
 Updated: 2026-08-24
+Figures re-measured: 2026-09-21 at commit `68a3359`
+
+> **Read with `ARCHITECTURE_GAP.md`.** This table records that the machinery for
+> each phase is **present and tested**. It does not record whether the machinery
+> produces observable state at runtime, and in several phases it does not. See
+> `.aelia/coordination/ARCHITECTURE_GAP.md` §A.1b for the measured counterexamples
+> — most notably the learning loop (`M6`), whose stages terminate at `INSERT`
+> while the `beliefs` table holds 0 rows after 4,085 cycles.
+>
+> `V2-00x` labels are historical milestone identifiers from before the project
+> was renamed to AELIA. They are kept for traceability.
 
 | Phase | Status | Evidence |
 |---|---|---|
@@ -19,7 +30,7 @@ Updated: 2026-08-24
 | Discord self-bot connector | Implemented offline; live canary pending | Isolated Node package, allowlists, kill switch, journal, external receipts, duplicate reconciliation, static preflight |
 | Discord official-bot connector | Implemented offline; live canary pending | `discord.js` v14, bot filtering, permission probe, deterministic nonce, external receipts |
 | Telegram official-bot connector | Implemented offline; live canary pending | Direct Bot API, durable polling cursor, reply/topic mapping, permission probe, external receipts |
-| V1 archive isolation | Complete | Byte-preserved source/config under `legacy/v1-rust`; root is V2-only |
+| V1 archive isolation | Complete | Byte-preserved source/config under `legacy/v1-rust`; root is AELIA-only |
 
 Final local acceptance evidence is recorded in
 [`FINAL_AUDIT.md`](FINAL_AUDIT.md). Production replacement is not claimed until
@@ -34,7 +45,7 @@ make quality
 make platforms-test
 ```
 
-The same locked quality gate runs in `.github/workflows/quality.yml` for V2
+The same locked quality gate runs in `.github/workflows/quality.yml` for AELIA
 changes with repository read-only permissions.
 
 The OpenAI-compatible provider is locally configured with the exact owner-selected
@@ -44,8 +55,9 @@ runtime smoke test completed with `thinking_mode = "disabled"`,
 command. No external platform side effect has been executed during local
 acceptance. V1 remains unchanged and is not used as a behavioral oracle.
 
-Latest verified kernel: `v2-010`; 182 Python tests and 34 Node connector tests
-pass. SQLite has no vector or graph store. Working memory is derived from the
+Latest verified kernel: `v2-010` (historical milestone id); **191 Python tests and
+40 Node connector tests** pass _(re-measured 2026-09-21; previously stated as 182
+and 34)_. SQLite has no vector or graph store. Working memory is derived from the
 bounded conversation buffer; durable memory records reference canonical events,
 beliefs, relationships, self model, policies, and goals.
 

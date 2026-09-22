@@ -2,13 +2,20 @@
 
 Updated: 2026-08-24
 
-This matrix treats the implementation plan as the delivery contract and the V2
-report as the architecture source. A green test alone is not counted unless it
+> **Status column caveat.** `Pass` here means the named invariant has evidence
+> exercising it. It does not mean the runtime produces the corresponding state.
+> Where the two diverge — for example `Model-derived memory requires validation`,
+> which is `Pass` by test while the `beliefs` table holds 0 rows in production —
+> the divergence is recorded in `.aelia/coordination/ARCHITECTURE_GAP.md` §A.1b.
+
+This matrix treats the implementation plan as the delivery contract and
+[`ARCHITECTURE_STATUS_REPORT.md`](ARCHITECTURE_STATUS_REPORT.md) as the
+architecture source. A green test alone is not counted unless it
 exercises the named invariant.
 
 | Requirement | Status | Authoritative evidence |
 |---|---|---|
-| V1 is frozen, preserved, and isolated from V2 | Pass | ADR 0001/0013; 205/205 tracked files byte-match the source commit; archive separation and persona-integrity tests |
+| V1 is frozen, preserved, and isolated from AELIA | Pass | ADR 0001/0013; 205/205 tracked files byte-match the source commit; archive separation and persona-integrity tests |
 | Persona sources are byte-preserved | Pass | `config doctor`; persona hash manifest; source-integrity tests |
 | Persona rules have source provenance | Pass | 43 rules validated by `PersonaSourceLoader`; behavioral suite |
 | Strict, independently versioned contracts | Pass | event `2.0.0`, action `2.2.0`, trace `2.3.0`, adapter ingress `1.0.0`, command/receipt `1.1.0`; contract tests |
@@ -36,8 +43,8 @@ exercises the named invariant.
 | Adapter reconnect/crash/outbox recovery | Pass | adapter runtime crash-window and concurrency integration tests |
 | Transaction rollback and retry history | Pass | ADR 0010; atomic repository integration tests; recovered state-conflict trace/replay test |
 | CLI test-canary is operable without live delivery | Pass | explicit fixed-content injector test; receipt remains `simulated` with `side_effect=false` |
-| V2 quality gate runs in CI | Pass | `.github/workflows/quality.yml` reproduces locked format, lint, strict type-check, and test gates with read-only permissions |
-| V2 is the documented default development path | Pass | root `README.md`, `.env.example`, and `make` entrypoints; V1 entrypoints live only under `legacy/v1-rust/` |
+| AELIA quality gate runs in CI | Pass | `.github/workflows/quality.yml` reproduces locked format, lint, strict type-check, and test gates with read-only permissions |
+| AELIA is the documented default development path | Pass | root `README.md`, `.env.example`, and `make` entrypoints; V1 entrypoints live only under `legacy/v1-rust/` |
 | Resolved config and privacy-bounded structured logging | Pass | `config doctor`; JSON logging unit test and CLI cycle-ID/no-content integration assertion |
 | Architecture governance and Definition of Done | Pass | ADR set 0001–0017; `DEFINITION_OF_DONE.md`; dependency, runtime-boundary, and contract gates |
 | External connector acceptance semantics are implemented | Pass offline | ADR 0012/0015/0016; external-canary outbox, receipt command, shared Node journal, duplicate-send/cursor tests, connector preflights |

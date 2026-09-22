@@ -399,4 +399,3 @@ modified. Nothing was executed against a live platform.*
 `data/aelia.db`. Every figure added since was measured read-only against it
 (`file:…?mode=ro`, `PRAGMA query_only=ON`) and every code claim was re-checked
 with a positive control. See `ARCHITECTURE_GAP.md` §A.1b.*
-

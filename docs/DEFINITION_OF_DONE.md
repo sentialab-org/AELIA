@@ -43,7 +43,7 @@ suite by itself is insufficient.
       platform SDK.
 - [ ] New dependencies, stores, frameworks, or major abstractions have an
       accepted ADR and measured need.
-- [ ] Ruff format/lint, strict mypy, and pytest pass locally and in the V2 CI
+- [ ] Ruff format/lint, strict mypy, and pytest pass locally and in the AELIA CI
       workflow.
 - [ ] Documentation, requirement evidence, test count, and runbook are current.
 - [ ] V1 remains isolated under `legacy/v1-rust/`; any change to its preserved

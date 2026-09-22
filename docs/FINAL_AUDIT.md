@@ -1,10 +1,16 @@
 # AELIA — Final Local Audit
 
 Updated: 2026-08-24
+Figures re-measured: 2026-09-21 at commit `68a3359`
+
+> **Scope note.** This audit verifies that the machinery is present, wired, and
+> tested. It is a code-and-test audit; it does not measure runtime state accrual.
+> Counterexamples of machinery that runs without state accruing are recorded in
+> `.aelia/coordination/ARCHITECTURE_GAP.md` §A.1b.
 
 ## Verdict
 
-The Python V2 kernel, long-lived runtime backend, OpenAI-compatible model
+The Python kernel, long-lived runtime backend, OpenAI-compatible model
 boundary, adapter outbox, and three isolated Node platform gates pass
 offline/local acceptance. The exact configured model route also passes an
 isolated provider probe and a synthetic Discord-envelope HTTP smoke through the
@@ -16,10 +22,10 @@ side effect was activated during this audit.
 | Gate | Result |
 |---|---|
 | Reproducible environment | `uv sync --frozen` passes |
-| Continuous integration | V2-only GitHub Actions workflow reproduces all local quality gates |
+| Continuous integration | AELIA-only GitHub Actions workflow reproduces all local quality gates |
 | Formatting and lint | Ruff passes |
 | Static typing | strict mypy passes for `src` and `tests` |
-| Automated tests | 182 Python tests and 34 Node connector tests pass |
+| Automated tests | 191 Python tests and 40 Node connector tests pass _(re-measured 2026-09-21; previously 182 and 34)_ |
 | Persona preservation | 4 source artifacts match their recorded SHA-256 hashes |
 | Persona specification | 43 source-traced rules and 18 behavioral scenarios |
 | Fresh database | migrations 1–8 apply; `PRAGMA integrity_check` returns `ok` |
@@ -34,7 +40,7 @@ side effect was activated during this audit.
 | Runtime backend/gate boundary | FastAPI backend starts without Discord; Node gates use versioned HTTP ingress/receipt calls and no production process launcher |
 | External connectors | Discord self-bot, Discord official bot, and Telegram official bot; allowlists, kill switches, journal/cursor, receipts, tests, audits, and static preflights pass |
 | V1 isolation | 205/205 tracked V1 files byte-preserved under `legacy/v1-rust`; Cargo metadata resolves 13 packages |
-| Default developer path | root quickstart, safe V2 env example, and machine-readable Make targets verified |
+| Default developer path | root quickstart, safe AELIA env example, and machine-readable Make targets verified |
 
 ## Architecture acceptance
 
@@ -73,7 +79,7 @@ side effect was activated during this audit.
 - No V1 runtime data is migrated because persona continuity is the only required
   asset.
 - V1 source, settings, `.env`, prompts, documentation, and local data are
-  retained as one isolated legacy environment rather than mixed into V2 root.
+  retained as one isolated legacy environment rather than mixed into the AELIA root.
 - V1 behavior and response text are not compatibility oracles.
 - The current participation policy enables `observe`, `silent`, `wait`, `reply`,
   and guarded group `join`. Other versioned outcomes remain disabled until a

@@ -1,4 +1,4 @@
-# Runtime Backend + Platform Gates Refactor Plan
+# AELIA — Runtime Backend + Platform Gates Refactor Plan
 
 Status: implemented and locally verified; owner-authorized live canary pending  
 Date: 2026-08-24

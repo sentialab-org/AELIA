@@ -1,0 +1,192 @@
+# TASKS.yaml — work in flight
+#
+# Contract (PROTOCOL.md §6): every task carries id, title, status, owner,
+# dependencies, updated_at. Add `evidence` only when the task is done, and only
+# with real file:line or commit references — never a document.
+#
+# status:  todo | in-progress | blocked | done | cancelled
+# owner:   claude-code | chatgpt | user
+#
+# A task with `blocked` MUST have a `blocked_on` naming an id or a question.
+
+meta:
+  updated_at: "2026-09-22T00:00:00Z"
+  branch: rebrand/aelia
+  basis_commit: 68a33592203d9cf10e035405a4cef384d9d662d7
+
+tasks:
+
+  - id: T-001
+    title: Rename Polyverse Agent V2 to AELIA (local tree, package, CLI, env prefix, DB)
+    status: done
+    owner: claude-code
+    dependencies: []
+    updated_at: "2026-09-21T13:05:21Z"
+    evidence:
+      - "commit e6aa49cc288bb0dddc5c20b5d5885238637793d1"
+      - "commit 68a33592203d9cf10e035405a4cef384d9d662d7"
+      - "origin/rebrand/aelia == HEAD (git rev-list --left-right --count => 0 0)"
+
+  - id: T-002
+    title: Bootstrap the cross-agent coordination layer at .aelia/coordination/
+    status: done
+    owner: claude-code
+    dependencies: []
+    updated_at: "2026-09-21T16:30:00Z"
+    evidence:
+      - ".aelia/coordination/PROTOCOL.md"
+      - ".aelia/coordination/CURRENT_STATE.md"
+      - ".aelia/coordination/ARCHITECTURE.md"
+      - ".aelia/coordination/ARCHITECTURE_GAP.md"
+      - ".aelia/coordination/DECISIONS.md"
+      - ".aelia/coordination/TASKS.yaml"
+      - ".aelia/coordination/HANDOFF.md"
+      - ".aelia/coordination/EVENTS.jsonl (evt-2026-09-21-005, evt-2026-09-21-006)"
+    notes: >
+      All eight documents written. ARCHITECTURE_GAP side B (TARGET AELIA) is
+      deliberately empty and marked awaiting-input — no target architecture exists
+      in this repository, verified rather than assumed.
+
+  - id: T-003
+    title: Root CLAUDE.md mandating the coordination protocol
+    status: done
+    owner: claude-code
+    dependencies: [T-002]
+    updated_at: "2026-09-21T16:30:00Z"
+    evidence:
+      - "CLAUDE.md"
+    notes: >
+      Created. LOCAL-ONLY: .gitignore:49 ignores CLAUDE.md, and line 50
+      (!/legacy/v1-rust/CLAUDE.md) is an explicit carve-out, which shows the
+      exclusion is deliberate rather than an oversight. .gitignore was NOT
+      changed — adding a `!/CLAUDE.md` exception is a repository change and the
+      user has not authorised it. Awaiting user decision on whether to track it.
+
+  - id: T-004
+    title: Decide the P8 autonomy promotion path (how SHADOW_APPROVED can ever become an action)
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-01 — no authorising GuardrailOutcome exists; ADR 0007 defers to an unbuilt P8"
+    updated_at: "2026-09-21T15:45:00Z"
+
+  - id: T-005
+    title: Decide whether the memory learning loop is completed or the write-only tables are retired
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-03 — three tables have no read path; the loop terminates at INSERT"
+    updated_at: "2026-09-21T15:45:00Z"
+
+  - id: T-006
+    title: Decide whether vector/embedding retrieval is in scope for AELIA
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-04 — vector_index_used is Literal[False]; no embedding dependency exists"
+    updated_at: "2026-09-21T15:45:00Z"
+
+  - id: T-007
+    title: Decide the firewall on gate-token auth (fail-open vs fail-closed)
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-06 — api.py:133-138 leaves three endpoints unauthenticated when the token is unset"
+    updated_at: "2026-09-21T15:45:00Z"
+
+  - id: T-008
+    title: Receive the target-AELIA architecture from ChatGPT and diff it against the current implementation
+    status: blocked
+    owner: chatgpt
+    dependencies: []
+    blocked_on: "HANDOFF.md — awaiting-input"
+    updated_at: "2026-09-21T15:45:00Z"
+
+  - id: T-009
+    title: Reconcile origin/main (V1 Rust monorepo, 10 commits ahead) with rebrand/aelia
+    status: todo
+    owner: user
+    dependencies: [T-002]
+    updated_at: "2026-09-21T15:45:00Z"
+    notes: >
+      NOT AUTHORISED. Merging moves the whole Rust monorepo under legacy/ and
+      introduces the Python kernel at root. One content conflict:
+      docs/wiki/local-interfaces/platform-relay.md (V1 Rust docs, correctly
+      homed at legacy/v1-rust/docs/wiki/local-interfaces/).
+
+  - id: T-010
+    title: Fix the CI/Makefile node --check divergence (runtime-client.js)
+    status: todo
+    owner: claude-code
+    dependencies: []
+    updated_at: "2026-09-21T15:45:00Z"
+    notes: >
+      Makefile:59-63 checks it; .github/workflows/quality.yml:77-80 omits it, so a
+      syntax error in runtime-client.js passes CI. One-line fix; waits on the
+      user lifting the audit-only freeze.
+
+  - id: T-011
+    title: Reconcile the 17 ADRs with shipped reality (0008/0012 de-facto superseded)
+    status: todo
+    owner: user
+    dependencies: []
+    updated_at: "2026-09-21T15:45:00Z"
+    notes: >
+      ADRs 0008 and 0012 still read Accepted with no Superseded line, and there is
+      no mechanical supersession mechanism in the repo. This is a governance
+      decision, not a documentation cleanup.
+
+  - id: T-012
+    title: Resolve the stale global worktree paths in ~/.claude/settings.json
+    status: todo
+    owner: user
+    dependencies: []
+    updated_at: "2026-09-21T15:45:00Z"
+    notes: >
+      Lines 35 and 37 reference /Users/zvwgvx/Project/polyverse-agent/.claude/worktrees/agent-a4464154b71f21c1d,
+      which no longer exists and is now doubly stale after the rename. Outside the
+      repository; reported only, never edited by an agent.
+
+  - id: T-013
+    title: Decide the retention, compaction and duplication policy for the cycle trace
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-07 and Q-08 — trace tables are 92.6% of the DB, grow ~264 MB/day, no reaper; the same trace is stored twice (G-37)"
+    updated_at: "2026-09-21T17:25:00Z"
+    notes: >
+      Recorded after the production-database measurement. Until this is decided,
+      `src/aelia/storage/` cannot be refactored safely and is therefore last in
+      the ranked migration boundaries (HANDOFF.md section 6). Sub-question Q-08 —
+      system of record or debug aid — is the one that changes the schema.
+
+  - id: T-014
+    title: Define the canonical permission-scope registry and who mints a scope
+    status: blocked
+    owner: user
+    dependencies: [T-004]
+    blocked_on: "Q-01/Q-06 — producer scopes {explicit_mention, message_thread} and consumer scopes {send_message, proactive_message, confirm_high_risk, confirm:{id}, proactive_private} have an empty intersection (G-36)"
+    updated_at: "2026-09-21T17:25:00Z"
+    notes: >
+      Stronger than G-04. Even if a PermissionContext were constructed, no
+      emitted scope could satisfy any consumer. Any target safety model has to
+      name the registry and the minting authority before autonomy can act.
+
+  - id: T-015
+    title: Decide the multi-process contract for the single SQLite file
+    status: blocked
+    owner: user
+    dependencies: []
+    blocked_on: "Q-09 — CLI, FastAPI backend and adapter runtime share data/aelia.db; the backend guards writes with an in-process asyncio.Lock only (backend/application.py:57)"
+    updated_at: "2026-09-21T17:25:00Z"
+    notes: >
+      Not a bug report: optimistic version checks under BEGIN IMMEDIATE
+      (ADR 0010) may be sufficient. This asks for the claim to be stated and
+      tested rather than assumed. Coupled to T-013 through the storage boundary.
+
+# ---------------------------------------------------------------------------
+# Not tasks — the audit-only freeze currently in force (user instruction).
+# Nothing under "no refactor / no target implementation" may be started until
+# the user lifts it. T-010 and T-011 are recorded so they are not lost, not
+# because they are authorised.
+# ---------------------------------------------------------------------------

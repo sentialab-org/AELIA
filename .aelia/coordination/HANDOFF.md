@@ -31,7 +31,7 @@ ADR is evidence for what was decided, never for what is built.**
 | | |
 |---|---|
 | Remote | `https://github.com/sentialab-org/AELIA.git` (SENTIA Lab) |
-| Branch | `rebrand/aelia` @ `68a33592203d9cf10e035405a4cef384d9d662d7`, pushed, in sync |
+| Branch | `dev` @ `89b8099f23ca0682ea0b8b8f39e6bf574c2ed280`, pushed, in sync with `origin/dev` |
 | Local | `/Users/zvwgvx/Project/AELIA` |
 | Package | `aelia` in `src/aelia` — 73 files, 13,490 lines |
 | Tests | 39 files, 191 collected cases |
@@ -44,12 +44,20 @@ The local tree was renamed to AELIA on 2026-09-21 across three commits (baseline
 tree, atomic rename, identity guards). The persona survived the rename with its
 own identity intact: `persona_id` is still **`ryuuko`** (ADR 0002).
 
-**`main` is divergent and untouched.** `origin/main` is 10 commits ahead of local
-`main` and is still the **V1 Rust monorepo at root**. Merging `rebrand/aelia` into
-`main` moves the whole Rust workspace under `legacy/`, introduces the Python
-kernel at root, and conflicts on exactly one file
-(`docs/wiki/local-interfaces/platform-relay.md` — V1 Rust docs, whose correct home
-here is `legacy/v1-rust/docs/wiki/local-interfaces/`). **Not authorised.**
+**`main` already contains the merge base.** `main` and `origin/main` are both at
+`4f78991` ("Merge dev into main"), and the merge base with `dev` is `68a3359`,
+which `main` already contains. `main` is therefore **not** the V1 Rust monorepo
+at root — it carries the same top-level layout as `dev` (`src/`, `docs/`,
+`legacy/`, `platforms/`). An earlier draft of this section described the merge as
+pending and unauthorised; it has already happened.
+
+What remains is a 12-file divergence (`git diff --stat 68a3359 main`):
+`.gitignore`, plus eleven files under `legacy/v1-rust/docs/wiki/` that upstream
+pull requests edited *inside* the byte-preserved archive ADR 0013 freezes —
+including `legacy/v1-rust/docs/wiki/local-interfaces/platform-relay.md`, which
+upstream added at exactly the path this tree would have chosen for it.
+Reconciling those eleven against the ADR 0013 freeze is a decision, not a
+fast-forward, and it has not been made.
 
 **What is live right now.** `config.toml` has `mode = "external_canary"` with
 `send_enabled = true` for the Discord selfbot, and

@@ -1,7 +1,7 @@
 # CURRENT_STATE — what this repository factually is
 
 **updated_at:** 2026-09-22T00:00:00Z
-**verified_at:** 2026-09-22T00:00:00Z (branch `rebrand/aelia`, commit `68a3359`)
+**verified_at:** 2026-09-22T00:00:00Z (branch `dev`, commit `89b8099`)
 **method:** read-only inspection of the working tree, plus read-only queries
 against `data/aelia.db`. Nothing in this file was executed against a live
 platform.
@@ -18,24 +18,39 @@ it does not describe the target AELIA. For the target, see
 |---|---|---|
 | Remote | `https://github.com/sentialab-org/AELIA.git` | `git remote -v` |
 | Local path | `/Users/zvwgvx/Project/AELIA` | — |
-| Active branch | `rebrand/aelia` | `git rev-parse --abbrev-ref HEAD` |
-| HEAD | `68a33592203d9cf10e035405a4cef384d9d662d7` | `git rev-parse HEAD` |
-| Tracking | `origin/rebrand/aelia`, in sync | `git rev-list --left-right --count origin/rebrand/aelia...HEAD` → `0 0` |
-| Working tree | clean except untracked `.aelia/` | `git status --short` |
+| Active branch | `dev` | `git rev-parse --abbrev-ref HEAD` |
+| HEAD | `89b8099f23ca0682ea0b8b8f39e6bf574c2ed280` | `git rev-parse HEAD` |
+| Tracking | `origin/dev`, in sync | `git rev-list --left-right --count origin/dev...HEAD` → `0 0` |
+| Working tree | clean | `git status --short` |
 | Package | `aelia` (`src/aelia`), CLI `aelia` / `aelia-backend` | `pyproject.toml` |
 | Python | 3.12+ (venv is 3.13) | `pyproject.toml`, `.venv/lib/python3.13` |
 
 **Lineage.** `zvwgvx/ryuuko-chatbot` → `polyverse-agent` → `sentialab-org/AELIA`.
-The rename of the *local tree* to AELIA landed on this branch on 2026-09-21
-(`e6aa49c`, `68a3359`). See `EVENTS.jsonl` `evt-2026-09-21-001..004`.
+The rename of the *local tree* to AELIA landed on 2026-09-21 on the branch now
+called `dev` (`e6aa49c`, `68a3359`). See `EVENTS.jsonl`
+`evt-2026-09-21-001..004`.
 
-**`main` diverges.** `origin/main` is 10 commits ahead of local `main` and is
-still the **V1 Rust monorepo at root** (`.cargo/`, `Cargo.toml`, `apps/`,
-`libs/`, `services/`). Merging `rebrand/aelia` into `main` is a large structural
-merge and is **not authorised**. The single content conflict is
-`docs/wiki/local-interfaces/platform-relay.md`, which upstream added inside a
-directory this branch renamed; its correct home here is
-`legacy/v1-rust/docs/wiki/local-interfaces/`.
+**`dev` and `main`.** The remote carries exactly two heads. Their merge base is
+`68a3359`, the tip of `dev` before the work below; `main` already contains it,
+merged as `4f78991` ("Merge dev into main"). `dev` is therefore 2 commits ahead
+of that point and `main` is 11, with nothing pending in either direction beyond
+what is listed here.
+
+The tree difference is small. `git diff --stat 68a3359 main` is 12 files:
+`.gitignore`, plus eleven under `legacy/v1-rust/docs/wiki/`, brought in by
+upstream pull requests. Those eleven are edits *inside* the byte-preserved
+archive that ADR 0013 freezes, so their presence on `main` and absence on `dev`
+is a divergence to reconcile deliberately, not a change to merge blindly.
+
+An earlier draft of this file described `main` as the V1 Rust monorepo at root
+and the merge as pending and unauthorised. Both are now false: `main` carries
+the same top-level layout as `dev` (`src/`, `docs/`, `legacy/`, `platforms/`),
+and the merge has already happened.
+
+The branch that draft called `rebrand/aelia` was renamed to `dev`;
+`rebrand/aelia` no longer exists locally or on the remote. See `EVENTS.jsonl`
+`evt-2026-09-22-011`. Older entries there still name `rebrand/aelia`, which was
+correct when written and is left unedited because that file is append-only.
 
 ---
 
@@ -200,3 +215,4 @@ passes CI.
 | 2026-09-21 | §4 rewritten with measured production-corpus figures after a completeness review found the first pass had not queried `data/aelia.db`. |
 | 2026-09-22 | §4 `memory_records` corrected 7,418 → **4,718**. The original figure did not reproduce and no table in the corpus holds 7,418 rows; recorded as `EVENTS.jsonl` `evt-2026-09-22-009`. |
 | 2026-09-22 | Documentation standardised: all `docs/*.md` converted to English, `V2` product-name residue replaced with `AELIA`, stale figures re-measured, broken relative links repaired, `README.md` reduced to a work-in-progress stub. The nine-document cross-check against this file and `ARCHITECTURE_GAP.md` is recorded in `ARCHITECTURE_GAP.md` §A.1c. |
+| 2026-09-22 | §1 corrected. The branch is `dev`, not `rebrand/aelia` — that branch no longer exists locally or on the remote. HEAD moved to `89b8099`, the working tree is clean, and `dev` is fully merged into `main`. This layer and the documentation standardisation were committed and pushed in `fd25820` and `89b8099`. |

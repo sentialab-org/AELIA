@@ -11,8 +11,9 @@
 
 meta:
   updated_at: "2026-09-22T00:00:00Z"
-  branch: rebrand/aelia
-  basis_commit: 68a33592203d9cf10e035405a4cef384d9d662d7
+  branch: dev
+  basis_commit: 68a33592203d9cf10e035405a4cef384d9d662d7   # code-audit basis
+  head_commit: 89b8099f23ca0682ea0b8b8f39e6bf574c2ed280    # branch tip at this writing
 
 tasks:
 
@@ -25,7 +26,7 @@ tasks:
     evidence:
       - "commit e6aa49cc288bb0dddc5c20b5d5885238637793d1"
       - "commit 68a33592203d9cf10e035405a4cef384d9d662d7"
-      - "origin/rebrand/aelia == HEAD (git rev-list --left-right --count => 0 0)"
+      - "origin/dev carried 68a3359 in sync (git rev-list --left-right --count => 0 0). The branch was named rebrand/aelia when this task completed and was later renamed to dev; see EVENTS.jsonl evt-2026-09-22-011."
 
   - id: T-002
     title: Bootstrap the cross-agent coordination layer at .aelia/coordination/
@@ -103,16 +104,20 @@ tasks:
     updated_at: "2026-09-21T15:45:00Z"
 
   - id: T-009
-    title: Reconcile origin/main (V1 Rust monorepo, 10 commits ahead) with rebrand/aelia
+    title: Reconcile the eleven upstream wiki files main carries inside the ADR 0013 byte-preserved archive
     status: todo
     owner: user
     dependencies: [T-002]
-    updated_at: "2026-09-21T15:45:00Z"
+    updated_at: "2026-09-22T00:00:00Z"
     notes: >
-      NOT AUTHORISED. Merging moves the whole Rust monorepo under legacy/ and
-      introduces the Python kernel at root. One content conflict:
-      docs/wiki/local-interfaces/platform-relay.md (V1 Rust docs, correctly
-      homed at legacy/v1-rust/docs/wiki/local-interfaces/).
+      Supersedes an earlier framing of this task. main already contains the
+      merge base 68a3359, merged as 4f78991 ("Merge dev into main"), so this is
+      not a pending structural merge and not a monorepo move — main carries the
+      same top-level layout as dev. What remains is `git diff --stat 68a3359
+      main`: 12 files, .gitignore plus eleven under legacy/v1-rust/docs/wiki/
+      that upstream pull requests edited inside the archive ADR 0013 freezes.
+      Whether those edits are reconciled, reverted, or carved out of the freeze
+      is a governance decision. Not authorised.
 
   - id: T-010
     title: Fix the CI/Makefile node --check divergence (runtime-client.js)
